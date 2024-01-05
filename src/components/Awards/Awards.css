@@ -1,0 +1,25 @@
+.sales{
+    flex-basis: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px;
+}
+.saleStats{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.saleStats .chart{
+    width: 400px;
+}
+.saleStats h1{
+    color: var(--primary-color);
+    margin: 10px 0;
+    font-weight: 500;
+}

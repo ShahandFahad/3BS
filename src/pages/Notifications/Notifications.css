@@ -1,0 +1,96 @@
+.notifications{
+    width: 90%;
+    box-shadow: 0 0 9px 1px rgba(0,0,0,0.2);
+    border: .5px solid #ccc;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 10px;
+    height: 80vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.notifications .notifi__left{
+    flex-basis: 20%;
+    background-color: var(--primary-color);
+    height: 100%;
+    border-radius: 10px 0 0 10px;
+}
+.notifi__left .notifi__left__header{
+
+    padding: 10px;
+}
+.notifi__left .notifi__left__header h2{
+    color: #fff;
+    font-weight: 400;
+}
+.notifications .notifi__right{
+    
+    flex-basis: 80%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0px 10px 10px 0px;
+}
+.notifi__right .notifi__right__header
+{
+    padding: 10px;
+}
+.notifi__left__header span{
+    background-color: rgb(5, 60, 114);
+    font-size: 15px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    font-weight: bold;
+  
+}
+.notifi__right .notifi__right__header .notifi__info{
+    color: #000;
+    font-weight: 400;
+}
+.notifications__list{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.notifications__list .single__notification{
+    width: 100%;
+    border: 1px solid #fff;
+    margin: 5px 0;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.single__notification .notifi__status {
+    font-size: 12px;
+    padding: 5px;
+    background-color: rgb(5, 60, 114);
+    color: #fff;
+    border-radius: 3px;
+}
+
+.single__notification:hover{
+    background-color: #a5a4a457;
+    cursor: pointer;
+    color: #fff;
+}
+.notifi__content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: -130px;
+}
+.notifi__content img{
+    width: 500px;
+}
+.notifi__content h1{
+    font-weight: 400;
+    margin-top: -100px;
+}

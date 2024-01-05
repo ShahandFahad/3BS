@@ -1,0 +1,19 @@
+.recent__products{
+    width: 90%;
+    margin: auto;
+}
+.recent__products h1{
+    margin: 15px 0;
+    font-weight: 500;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    width: fit-content;
+    padding-bottom: 5px;
+}
+
+.recent__products .products__container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}

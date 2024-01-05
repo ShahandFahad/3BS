@@ -1,0 +1,22 @@
+.transactions{
+    margin-top: 70px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 90vh;
+}
+.transaction__container{
+    flex-basis: 80%;
+}
+.transaction__container .transaction__header{
+    display: flex;
+    align-items: center;
+}
+
+.transactions h1{
+    color: var(--primary-color);
+    margin: 10px 0;
+    font-weight: 500;
+}
+

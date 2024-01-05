@@ -1,0 +1,73 @@
+.right__navbar{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: var(--primary-color);
+
+}
+.right__navbar a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #a8a8a8;
+    /* font-weight: bold; */
+}
+.right__navbar a.active{
+    color: #000;
+}
+.right__navbar .buy{
+    transform: rotate(-140deg);
+}
+.right__navbar a p{
+    font-size: 12px;
+}
+.right__navbar a:not(.label):hover{
+color: black;
+cursor: pointer;
+}
+.right__navbar .navbar__notifications .MuiSvgIcon-root{
+    cursor: pointer;
+    color: var(--primary-color);
+    margin: 0 6px;
+}
+.right__navbar .navbar__notifications .MuiSvgIcon-root:hover{
+    color: rgb(34, 34, 34);
+
+}
+.right__navbar .label{
+    color: rgb(27, 27, 27);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+.right__navbar .label p{
+    font-size: 14px;
+    font-weight: 400;
+}
+.right__navbar .label .MuiSvgIcon-root{
+    font-size: 20px;
+    margin-left: 2px;
+}
+.right__navbar .label:hover{
+    color: rgb(92, 92, 92);
+    cursor: pointer;
+}
+.notifi__icon{
+    position: relative;
+}
+.notifi__icon div{
+    position: absolute;
+    top: 2px;
+    right: 23px;
+    height: 11px;
+    width: 11px;
+    background-color: rgb(8, 124, 170);
+    border-radius: 50%;
+    border: 1px solid #fff;
+
+
+
+
+}

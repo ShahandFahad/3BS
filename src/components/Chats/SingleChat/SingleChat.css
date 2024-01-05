@@ -1,0 +1,33 @@
+.single__chat {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 95%;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    padding: 5px;
+}
+.single__chat.active{
+    background-color: red;
+}
+.single__chat img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 1px;
+    margin-right: 5px;
+    border: 1px solid var(--primary-color);
+}
+.single__chat p{
+    font-weight: 500;
+    color: var(--primary-color);
+}
+.single__chat span{
+    color: gray;
+    font-size: 12px;
+}
+.single__chat:hover{
+    cursor: pointer;
+    background-color: rgba(204, 204, 204, 0.404);
+}

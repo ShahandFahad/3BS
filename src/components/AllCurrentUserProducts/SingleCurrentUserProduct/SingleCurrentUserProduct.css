@@ -1,0 +1,106 @@
+.single__current__user__product {
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin: 10px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  border-radius: 5px;
+  position: relative;
+}
+.single__current__user__product .MuiSvgIcon-root {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  color: #4d4d4d;
+}
+.single__current__user__product:hover {
+  background-color: rgba(226, 226, 226, 0.507);
+  cursor: pointer;
+}
+.single__current__user__product p {
+  width: 200px;
+  text-align: center;
+}
+.single__current__user__product img {
+  width: 50px;
+  height: 50px;
+}
+.single__current__user__product .title {
+  font-size: 14px;
+}
+.single__current__user__product .price {
+  font-weight: 500;
+}
+.single__current__user__product .status {
+  padding: 3px;
+  width: 130px;
+  text-align: center;
+  font-size: 13px;
+  border-radius: 10px;
+  color: #fff;
+  height: 25px;
+}
+.status:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+.single__current__user__product .createdAt {
+  color: #4d4d4d;
+  font-size: 12px;
+}
+.single__current__user__product .modal {
+  padding-top: 20px;
+  min-width: 100px;
+  user-select: none;
+  position: absolute;
+  top: 0px;
+  right: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 9px 1px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  z-index: 11;
+  border: 1px solid #ccc;
+}
+.single__current__user__product .modal p {
+  text-align: left;
+  width: 100%;
+  font-size: 12px;
+  padding: 2px;
+  color: var(--primary-color);
+  padding: 5px;
+}
+.single__current__user__product .modal p:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+.single__current__user__product .modal a {
+  color: #fff;
+  display: block;
+  width: 100%;
+}
+.single__current__user__product .modal .MuiSvgIcon-root {
+  position: absolute;
+  top: 0px;
+  left: 80%;
+  font-size: 20px;
+  color: #4d4d4d;
+}
+.single__current__user__product .modal .MuiSvgIcon-root:hover {
+  color: black;
+  cursor: pointer;
+}
+.single__current__user__product .titleviews {
+  background-color: rgba(0, 0, 0, 0.808);
+  color: #fff;
+  font-size: 12px;
+  min-width: fit-content;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0 0 9px 1px rgba(0, 0, 0, 0.2);
+}

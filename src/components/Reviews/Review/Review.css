@@ -1,0 +1,40 @@
+.review{
+    margin: 20px 0;
+}
+.header__left img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+   margin-right: 5px;
+   
+}
+.review__header{
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+.header__left{
+display: flex;
+align-items: center;
+
+}
+.header__left .fullname{
+    font-weight: 500;
+}
+.review__createdAt{
+    color: gray;
+    font-size: 12px;
+    margin: 5px;
+}
+.header__left .MuiSvgIcon-root{
+    font-size: 16px;
+    color: #4D4D4D;
+}
+.stars{
+    display: flex;
+}
+.review__desc{
+    font-size: 14px;
+}

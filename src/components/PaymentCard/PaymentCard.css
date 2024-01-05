@@ -1,0 +1,142 @@
+.payment_card{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+}
+.payment_card .amount p{
+  font-size: 22px;
+  color: #fff;
+}
+.payment_card .amount h1{
+  color: #fff;
+  font-weight: 500;
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+.payment_card .card{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 70%;
+}
+/* .payment_card .card input{
+  width: 100%;
+  padding: 5px;
+  border: 1px solid transparent;
+  outline: none;
+  font-size: 20px;
+} */
+.payment_card .paymentcard{
+  color: #fff;
+  font-size: 24px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.payment_card .card{
+  width: 100%;
+}
+.payment_card .card .singleinput{
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  margin: 2px 0;
+}
+.singleinput label{
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 2px;
+}
+.card .card2{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 60%;
+}
+.card .singleinput input{
+  width: 100%;
+  padding: 5px;
+  font-size: 16px;
+}
+.singleinput.cvv{
+  flex-basis: 35%;
+  
+}
+.payment_card .btns{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+}
+.payment_card .btns button{
+  outline: none;
+  padding: 5px;
+  width: 100px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: .2s;
+}
+.btns .cancel{
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #fff;
+}
+.btns .pay{
+  background-color: rgb(255, 255, 255);
+  color: #000000;
+  border: 1px solid transparent;
+
+}
+.btns .cancel:hover{
+  background-color: #2e2e2e;
+}
+.btns .pay:hover{
+  background-color: #161616;
+  color: #fff;
+}
+.paid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  /* background-color: #fff; */
+}
+.paid h1{
+  color: #fff;
+  font-weight: 500;
+}
+.paid img{
+  width: 45px;
+  height: 45px;
+  margin: 10px 0;
+}
+.paid .okBtn{
+  outline: none;
+  border: 1px solid #fff;
+  padding: 5px 10px;
+  /* width: 100px; */
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: .2s;
+  color: #fff;
+}
+.paid p{
+  color: #fff;
+  width: 70%;
+  text-align: center;
+  margin: 5px 0;
+}
+.paid .okBtn:hover{
+  background-color: rgb(36, 36, 36);
+  color: #ffffff;
+}

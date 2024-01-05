@@ -1,0 +1,28 @@
+.orders{
+    margin-top: -50px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 90vh;
+}
+.transaction__container{
+    width: 100%;
+}
+.transaction__container .transaction__header{
+    display: flex;
+    align-items: center;
+}
+
+.orders .transaction__header h1{
+    color: var(--primary-color);
+    margin: 10px 0;
+    font-weight: 500;
+}
+
+
+.single__transaction__header p{
+    color: #fff;
+    font-weight: 400;
+
+}

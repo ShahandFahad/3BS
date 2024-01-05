@@ -1,0 +1,12 @@
+.footer{
+    padding: 20px;
+    border-top: 1px solid #ccc;
+    margin-top: 20px;
+}
+.footer p{
+    font-weight: bold;
+}
+.footer span{
+    font-weight: 400;
+    user-select: none;
+}

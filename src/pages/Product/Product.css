@@ -1,0 +1,17 @@
+.product__container{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    margin-top: 105px;
+    user-select: none;
+    margin-bottom: 30px;
+}
+.container__left{
+    flex-basis: 50%;
+}
+
+.container__right{
+    flex-basis: 50%;
+}

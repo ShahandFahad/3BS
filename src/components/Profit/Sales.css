@@ -1,0 +1,46 @@
+.sales{
+    flex-basis: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px;
+}
+.saleStats{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.saleStats .chart{
+    width: 400px;
+}
+.sales h1{
+    color: var(--primary-color);
+    margin: 10px 0;
+    font-weight: 500;
+}
+.total__revenue{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.total__revenue button{
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    background-color: var(--primary-color);
+    color: #fff;
+    margin: 5px 0;
+    border-radius: 5px;
+    box-shadow: 0 0 9px 1px rgba(0,0,0,0.3);
+    transition: .1s;
+}
+.total__revenue button:hover{
+    cursor: pointer;
+    background-color: rgb(39, 38, 38);
+}

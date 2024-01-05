@@ -1,0 +1,12 @@
+.product__sold{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    user-select: none;
+}
+.title{
+    font-size: 22px;
+    margin: 10px;
+    font-weight: 600;
+}

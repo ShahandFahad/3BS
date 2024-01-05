@@ -1,0 +1,112 @@
+
+.register{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    user-select: none;
+    background-image: url('../../../public/images/Capture.PNG');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.register .overlay{
+    background-color: rgba(32, 32, 32, 0.705);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.register__form{
+    background-color: #fff;
+color: #000;
+width: 550px;
+border-radius: 5px;
+box-shadow: 0 0 9px 1px rgba(0,0,0,0.3);
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+.register__form h2{
+    font-size: 50px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 10px 0;
+}
+.register__form .desc{
+    font-size: 20px;
+}
+.register__form .inputs{
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.register__form .inputs .inputs__box{
+    width: 48%;
+    margin: 5px;
+}
+.inputs__box input{
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 16px;
+    border-radius: 4px;
+}
+.inputs__box input::placeholder{
+    color: rgb(192, 192, 192);
+}
+.inputs__box input:focus{
+    border-color: var(--primary-color);
+}
+.register .inputs .inputs__box p{
+    font-weight: 500;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+ 
+}
+.inputs__box select{
+    width: 160px;
+    padding: 8px 10px;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 6px;
+    margin-bottom: 5px;
+}
+.inputs__box select option{
+    font-size: 14px;
+}
+.form__footer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+.form__footer button{
+    border: none;
+    outline: none;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding:  8px;
+    flex-basis: 40%;
+    font-size: 16px;
+    margin-right: 10px;
+    border-radius: 5px;
+
+}
+.form__footer button:hover{
+    background-color: rgb(107, 107, 107);
+    cursor: pointer;
+}
+.form__footer p{
+    color: var(--primary-color);
+}
+.form__footer span{
+    color: dodgerblue;
+    cursor: pointer;
+}

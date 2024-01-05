@@ -1,0 +1,198 @@
+.profile__header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  user-select: none;
+  position: relative;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+.profile__header .edit__profile {
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 7px 8px;
+  border-radius: 50%;
+  box-shadow: 0 0 9px 1px rgba(0, 0, 0, 0.3);
+  transition: 0.3s;
+}
+/* edit container */
+.profile__header .edit__container {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+.profile__header .edit__container .inputs {
+  width: 100%;
+}
+.profile__header .edit__container .inputs .inputs__box {
+  width: 90%;
+}
+.profile__header .edit__container h1 {
+  z-index: 11;
+  opacity: 1;
+}
+.edit__container .register__form {
+  position: relative;
+  height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.edit__container .register__form .register__form__close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.edit__container .inputs__box textarea {
+  width: 100%;
+  height: 100px;
+  padding: 5px;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 16px;
+  border-radius: 4px;
+  resize: none;
+}
+.inputs__box textarea::placeholder {
+  color: rgb(192, 192, 192);
+}
+.inputs__box textarea:focus {
+  border-color: var(--primary-color);
+}
+.edit__container .register__form .register__form__close:hover {
+  color: var(--primary-color);
+  cursor: pointer;
+}
+.profile__header .edit__container .register__form img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-color);
+  padding: 2px;
+}
+.edit__container .register__form .inputs {
+  flex-direction: column;
+}
+.edit__container .inputs__box p {
+  margin-bottom: 5px;
+}
+
+.profile__header .edit__profile:hover {
+  background-color: rgb(32, 32, 32);
+  cursor: pointer;
+}
+
+.profile__header .profile__img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  padding: 2px;
+  border: 2px solid var(--primary-color);
+}
+.profile__header .level__img {
+  width: 80px;
+}
+.profile__info {
+  margin: 0 10px;
+}
+.profile__info .info__name {
+  font-size: 22px;
+  font-weight: 500;
+}
+.profile__info .info__views {
+  color: #fff;
+  margin-top: 10px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.726);
+  border-radius: 5px;
+  box-shadow: 0 0 9px 1px rgba(0, 0, 0, 0.3);
+  padding: 5px;
+}
+.info__views p {
+font-size: 16px;
+  margin-left: 5px;
+  margin-right: 2px;
+}
+.profile__info .info__from {
+  color: gray;
+}
+/* Details or edit */
+.show__details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.show__details p {
+  margin: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.show__details :not(.active):hover {
+  color: var(--primary-color);
+}
+.show__details .active {
+  color: dodgerblue;
+}
+.profile__details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 10px;
+}
+.profile__details .single__details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 3px 0;
+}
+.profile__details .single__details label {
+  font-weight: bold;
+  color: var(--primary-color);
+  font-size: 18px;
+  margin-right: 10px;
+}
+.profile__details .single__details p {
+  /* font-weight: bold; */
+  color: var(--primary-color);
+  font-size: 18px;
+}
+.profileImg {
+  position: relative;
+  cursor: pointer;
+}
+.profileImg input {
+  display: none;
+}
+.profileImg .MuiSvgIcon-root {
+  position: absolute;
+  bottom: 8px;
+  right: 0;
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 5px;
+  border-radius: 50%;
+  font-size: 28px;
+  cursor: pointer;
+}
+.profileImg .MuiSvgIcon-root:hover {
+  background-color: #fff;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}

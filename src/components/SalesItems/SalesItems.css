@@ -1,0 +1,64 @@
+.sales__items{
+    flex-basis: 80%;
+    height: 100%;
+    padding: 10px;
+}
+.sales__items h1{
+    font-weight: 500;
+    color: var(--primary-color);
+}
+.sales__items .single__item{
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    padding: 10px;
+    position: relative;
+}
+.sales__items .single__item img{
+    width: 40px;
+    height: 40px;
+} 
+.sales__items .single__item .title{
+    font-size: 16px;
+}
+.sales__items .single__item .seen{
+    width: 60px;
+    display: grid;
+    place-items: center;
+
+}
+.sales__items .single__item .seen p{
+    font-size: 12px;
+    margin-right: 10px;
+}
+.sales__items .single__item .status{
+    font-size: 12px;
+}
+.single__item .actions{
+    position: absolute;
+    top: -15px;
+    right: 0;
+    display: none;
+    align-items: center;
+}
+.single__item:hover  .actions{
+    display: flex;
+}
+.sales__items .single__item:hover{
+    background-color: #cccccc9c;
+}
+.sales__items .actions .MuiSvgIcon-root{
+    font-size: 28px;
+    margin: 0 5px;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 5px;
+    border-radius: 50%;
+    transition: .1s;
+}
+.sales__items .actions .MuiSvgIcon-root:hover{
+    background-color: rgb(20, 20, 20);
+    cursor: pointer;
+}

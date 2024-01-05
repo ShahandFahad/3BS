@@ -1,0 +1,37 @@
+.favorite{
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+.favorite .recent__product{
+    position: relative;
+}
+.favorite .remove__fav{
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ffffff;
+    padding: 5px;
+    width: 25px;
+    height: 25px;
+    color: #000000;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #000000;
+    transition: .2s;
+}
+.favorite .remove__fav .MuiSvgIcon-root{
+    font-size: 18px;
+
+}
+.recent__product:hover  .remove__fav{
+    display: flex;
+}
+.recent__product .remove__fav:hover{
+    background-color: #000000;
+    color: #fff;
+}

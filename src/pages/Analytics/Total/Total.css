@@ -1,0 +1,15 @@
+.total{
+    margin-top: 70px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 90vh;
+}
+.total .loader{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    width: 80%;
+}
