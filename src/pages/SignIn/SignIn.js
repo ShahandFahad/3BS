@@ -6,6 +6,7 @@ import { loader } from "../../loader";
 import { LOG_IN } from "../../redux/User/userTypes";
 import { publicRequest } from "../../requestMethods";
 import "./SignIn.css";
+import logo from "./3BS-logo.jpg";
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -69,8 +70,8 @@ function SignIn() {
 
   return (
     <div className="signin">
-      <div className="overlay">
-        <div className="signin__form">
+      <div className="overlay ">
+        <div className="signin__form bg-white">
           {!isVerifiedError ? (
             <>
               {error && (
@@ -78,11 +79,18 @@ function SignIn() {
                   <p>{error}</p>
                 </div>
               )}
-              <h2 className="logo">SERB</h2>
-              <p className="desc">Log In To Your Account</p>
+              <div className="logo border shadow-lg">
+                {/* <h2 className="logo">3BS</h2> */}
+                <img
+                  className="border h-40 w-40 overflow-hidden rounded-full boxsh shadow-lg"
+                  src={logo}
+                  alt="logo"
+                />
+                <p className="desc">Log In To Your Account</p>
+              </div>
               {/* inputs */}
-              <div className="inputs">
-                <div className="inputs__box">
+              <div className="inputs border">
+                <div className="inputs__box ">
                   <p>Email</p>
                   <input
                     type="text"
@@ -103,7 +111,10 @@ function SignIn() {
               </div>
               {/* Form Footer */}
               <div className="form__footer">
-                <button onClick={handleLogin}>
+                <button
+                  onClick={handleLogin}
+                  className="shadow-lg hover:shadow-gray-500/50"
+                >
                   {loading ? (
                     <img src={loader} width={15} height={15} />
                   ) : (
@@ -121,7 +132,7 @@ function SignIn() {
             </>
           ) : (
             <>
-              <h2 className="logo">SERB</h2>
+              <h2 className="logo">3BS</h2>
 
               <div className="verified__box">
                 <h3>Sorry, You Are Not Verified</h3>

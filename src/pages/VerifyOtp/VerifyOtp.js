@@ -80,7 +80,7 @@ function VerifyOtp() {
             </div>
           )}
 
-          <h2 className="logo">SERB</h2>
+          <h2 className="logo">3BS</h2>
           <p className="desc">
             Please enter the 4 digits verification code sent to
           </p>
