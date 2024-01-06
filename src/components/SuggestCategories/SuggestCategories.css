@@ -1,40 +1,40 @@
-.suggest__categories{
-    width: 90%;
-    margin: auto;
-    margin-top: 80px;
+.suggest__categories {
+  width: 90%;
+  margin: auto;
 }
-.suggest__categories h1{
-    margin: 15px 0;
-    font-weight: 500;
-    color: var(--primary-color);
-    border-bottom: 2px solid var(--primary-color);
-    width: fit-content;
-    padding-bottom: 5px;
+.suggest__categories h1 {
+  margin: 15px 0;
+  font-weight: 500;
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
+  width: fit-content;
+  padding-bottom: 5px;
 }
 
-.suggest__categories .btns
-{
-    width: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: auto;
+.suggest__categories .btns {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: auto;
+  text-transform: capitalize;
+  margin-top: 10px;
 }
-.suggest__categories .btns a{
-    border: none;
-    outline: none;
-    padding: 10px;
-    border-radius: 7px;
-    border: 1px solid #ccc;
-    margin: 10px;
-    font-size: 16px;
-    background-color: transparent;
-    color: gray;
-    transition: .2s;
+.suggest__categories .btns a {
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 7px;
+  border: 1px solid #ccc;
+  margin: 10px;
+  font-size: 16px;
+  background-color: transparent;
+  color: gray;
+  transition: 0.2s;
 }
-.suggest__categories a:hover{
-    background-color: var(--primary-color);
-    color: #fff;
-    cursor: pointer;
+.suggest__categories a:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+  cursor: pointer;
 }

@@ -20,8 +20,8 @@ function RecentProducts({ title, items }) {
 
   return !loading ? (
     <div className="recent__products">
-      <h1>{title}</h1>
-      <div className="products__container">
+      <h1 className="text-xl">{title}</h1>
+      <div className="border p-6  rounded-md bg-gray-100 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4">
         {products.map((product) => (
           <RecentProduct key={product.id} product={product} />
         ))}
@@ -29,7 +29,7 @@ function RecentProducts({ title, items }) {
     </div>
   ) : (
     <div className="loader">
-      <img src={loader} style={{ margin: "50px 0" }} />
+      <img alt="" src={loader} style={{ margin: "50px 0" }} />
     </div>
   );
 }

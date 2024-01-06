@@ -46,7 +46,7 @@ function Navbar() {
         ) : (
           <Link to="/currentuserprofile" className="register__section">
             <p style={{ color: "#fff" }}>{user.fullName}</p>
-            <img src={user.profileImage} />
+            <img alt="prfile" src={user.profileImage} />
           </Link>
         )}
       </div>

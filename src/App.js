@@ -39,6 +39,8 @@ function App() {
   return (
     <>
       <Routes>
+        <Route path="/" element={<Home />} />
+
         <Route element={<ProtectedRoutes />}>
           <Route path="/" element={<Home />} />
           <Route path="/product/:productId" element={<Product />} />
