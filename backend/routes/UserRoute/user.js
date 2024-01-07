@@ -20,7 +20,7 @@ const sendEmail = (receiverName, receiverEmail, recieverOtp) => {
   });
   // Step 2
   let mailOptions = {
-    from: "mernstack51729@gmail.com", //  email sender
+    from: "abdullahkhan12064@gmail.com", //  email sender
     to: receiverEmail, // email receiver
     subject: "SERB Confirmation",
     html: `Dear ${receiverName}, your OTP for <b>SERB</b> Verification is:  <h1>${recieverOtp}</h1>

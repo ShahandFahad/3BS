@@ -7,6 +7,9 @@ import { loader } from "../../loader";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LOG_IN } from "../../redux/User/userTypes";
+
+import logo from "./3BS-logo.jpg";
+
 function Register() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -93,99 +96,134 @@ function Register() {
               <p>{error}</p>
             </div>
           )}
-          <h2 className="logo">SERB</h2>
+          {/* <h2 className="logo">SERB</h2>
           <p className="desc">
             Register Yourself to Sell, Exchange or Buy Products
-          </p>
+          </p> */}
+
+          <div className="logo border shadow-lg sm:flex items-center justify-center">
+            <img
+              className="border rounded-full boxsh shadow-lg sm:w-24 sm:h-24 w-16 h-16 md:w-42 md:h-42 overflow-hidden"
+              src={logo}
+              alt="logo"
+            />
+            <p className="text-sm mt-4 sm:mt-0 md:ml-4">
+              Register Yourself to Sell, Exchange, or Buy Products
+            </p>
+          </div>
+
           {/* inputs */}
           <div className="inputs">
-            <div className="inputs__box">
-              <p>Full Name</p>
-              <input
-                type="text"
-                placeholder="Example"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                autoFocus
-              />
-            </div>
-            <div className="inputs__box">
-              <p>Email</p>
-              <input
-                type="text"
-                placeholder="someone@gmail.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="inputs__box">
-              <p>Password</p>
-              <input
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <div className="inputs__box">
-              <p>Confirm Password</p>
-              <input
-                type="password"
-                placeholder="••••••••"
-                value={cpassword}
-                onChange={(e) => setCpassword(e.target.value)}
-              />
+            <div className="w-full">
+              <div className="inputs__box">
+                <p>Full Name</p>
+                <input
+                  type="text"
+                  placeholder="Example"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  autoFocus
+                />
+              </div>
+              <div className="inputs__box">
+                <p>Email</p>
+                <input
+                  type="text"
+                  placeholder="someone@gmail.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="inputs__box">
+                <p>Password</p>
+                <input
+                  type="password"
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <div className="inputs__box">
+                <p>Confirm Password</p>
+                <input
+                  type="password"
+                  placeholder="••••••••"
+                  value={cpassword}
+                  onChange={(e) => setCpassword(e.target.value)}
+                />
+              </div>
             </div>
             {/* DOB */}
             <div className="inputs__box" style={{ width: "100%" }}>
               <p>Date of Birth</p>
-              <select onChange={(e) => setBirthDay(e.target.value)}>
-                <option hidden>DD</option>
-                {days.map((d) => (
-                  <option value={d < 10 ? `0${d}` : d}>
-                    {d < 10 ? `0${d}` : d}
-                  </option>
-                ))}
-              </select>
-              <select onChange={(e) => setBirthMonth(e.target.value)}>
-                <option hidden>MM</option>
-                {months.map((m) => (
-                  <option value={m}>{m}</option>
-                ))}
-              </select>
-              <select onChange={(e) => setBirthYear(e.target.value)}>
-                <option hidden>YY</option>
-                {years.map((y) => (
-                  <option value={y}>{y}</option>
-                ))}
-              </select>
+              <div className="flex justify-between flex-wrap">
+                <select onChange={(e) => setBirthDay(e.target.value)}>
+                  <option hidden>DD</option>
+                  {days.map((d) => (
+                    <option value={d < 10 ? `0${d}` : d}>
+                      {d < 10 ? `0${d}` : d}
+                    </option>
+                  ))}
+                </select>
+                <select onChange={(e) => setBirthMonth(e.target.value)}>
+                  <option hidden>MM</option>
+                  {months.map((m) => (
+                    <option value={m}>{m}</option>
+                  ))}
+                </select>
+                <select onChange={(e) => setBirthYear(e.target.value)}>
+                  <option hidden>YY</option>
+                  {years.map((y) => (
+                    <option value={y}>{y}</option>
+                  ))}
+                </select>
+
+                {/* Gender */}
+                {/* <div className="inputs__box" style={{ width: "100%" }}> */}
+                {/* <p>Gender</p> */}
+                <select onChange={(e) => setGender(e.target.value)}>
+                  <option hidden>Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+                {/* </div> */}
+              </div>
             </div>
 
-            {/* Gender */}
-            <div className="inputs__box" style={{ width: "100%" }}>
-              <p>Gender</p>
-              <select onChange={(e) => setGender(e.target.value)}>
-                <option hidden>Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-            <p style={{ fontSize: "13px", color: "var(--primary-color)" }}>
-              By clicking Sign Up, you agree to our Terms, Privacy Policy and
-              Cookies Policy. You may receive SMS notifications from us and can
-              opt out at any time.
-            </p>
             {/* Form Footer */}
-            <div className="form__footer">
-              <button onClick={handleRegistration}>
+            <div className="w-full flex flex-col gap-3 items-center justify-center">
+              <button
+                className="w-64 px-4 py-2 inline-flex items-center justify-center rounded-md bg-gray-800 font-semibold text-white shadow-lg hover:shadow-gray-500/50 mt-3"
+                onClick={handleRegistration}
+              >
                 {loading ? (
-                  <img src={loader} width={15} height={15} />
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-400"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      stroke-width="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
                 ) : (
                   "Register Now"
                 )}
               </button>
-              <p>
+
+              <p className="text-base">
                 Already have an account?{" "}
                 <Link to="/login" style={{ color: "dodgerblue" }}>
                   Login

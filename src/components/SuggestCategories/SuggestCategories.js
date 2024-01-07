@@ -17,14 +17,19 @@ function SuggestCategories() {
   ];
   return (
     <div className="suggest__categories">
-      <h1>Categories</h1>
-      <div className="btns">
-        {categories.map((cat) => (
-          <Link to={`/search?product=${cat}`} key={cat}>
-            {cat}
-          </Link>
-        ))}
-      </div>
+      <fieldset class="border-t border-gray-300">
+        <legend class="mx-auto px-4 text text-gray-400 text-xl">
+          Top Categories
+        </legend>
+
+        <div className="btns">
+          {categories.map((cat) => (
+            <Link to={`/search?product=${cat}`} key={cat}>
+              {cat}
+            </Link>
+          ))}
+        </div>
+      </fieldset>
     </div>
   );
 }

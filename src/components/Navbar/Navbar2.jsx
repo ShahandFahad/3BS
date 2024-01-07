@@ -1,7 +1,14 @@
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon, ChatBubbleOvalLeftEllipsisIcon, ChartBarIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
-
+import { Fragment } from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import {
+  Bars3Icon,
+  BellIcon,
+  XMarkIcon,
+  ChatBubbleOvalLeftEllipsisIcon,
+  ChartBarIcon,
+  MagnifyingGlassIcon,
+  UserCircleIcon,
+} from "@heroicons/react/24/outline";
 
 import React, { useState } from "react";
 import "./Navbar.css";
@@ -14,51 +21,52 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { publicRequest } from "../../requestMethods";
 import { LOG_OUT } from "../../redux/User/userTypes";
-
+import companyLogo from "./3BS-Logo.png";
 
 const navigation = [
-  { name: 'Buy', visitTo: '/', current: true },
-  { name: 'Sell', visitTo: '/currentuserprofile', current: false },
-  { name: 'Bartering', visitTo: '/exchangeproducts', current: false },
-  { name: 'Bidding', visitTo: '#', current: false },
-  { name: 'Rent', visitTo: '#', current: false },
-  { name: 'Buyer Request', visitTo: '#', current: false },
-]
-
-
+  { name: "Buy", visitTo: "/", current: true },
+  { name: "Sell", visitTo: "/currentuserprofile", current: false },
+  { name: "Bartering", visitTo: "/exchangeproducts", current: false },
+  { name: "Bidding", visitTo: "#", current: false },
+  { name: "Rent", visitTo: "#", current: false },
+  { name: "Buyer Request", visitTo: "#", current: false },
+];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function Navbar() {
+  const [searchProduct, setSearchProduct] = useState("");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const [notifications, setNotifications] = useState([]);
-  
-    // handle logout
-    const handleLogout = () => {
-      localStorage.clear();
-      dispatch({ type: LOG_OUT });
-    };
-  
-    // fetch unread notifications
-    useEffect(() => {
-      const getNotifications = async () => {
-        const gotNotifications = await publicRequest.get(
-          `/notifications/unread/${user._id}`
-        );
-        setNotifications(gotNotifications.data);
-      };
-      getNotifications();
-    }, [notifications]);
 
+  // handle logout
+  const handleLogout = () => {
+    localStorage.clear();
+    dispatch({ type: LOG_OUT });
+  };
+
+  // fetch unread notifications
+  useEffect(() => {
+    const getNotifications = async () => {
+      const gotNotifications = await publicRequest.get(
+        `/notifications/unread/${user._id}`
+      );
+      setNotifications(gotNotifications.data);
+    };
+    getNotifications();
+  }, [notifications]);
 
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure
+      as="nav"
+      className="bg-gray-800 sticky top-0 z-50 drop-shadow-md"
+    >
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div className="w-full px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
@@ -72,93 +80,152 @@ export default function Navbar() {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
-                    <Link to="/">
+              <div className="flex flex-1 items-center justify-between sm:items-stretch sm:justify-start">
+                <div className="flex flex-shrink-0 items-center mx-12">
+                  <Link to="/">
                     <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
-                    </Link>
+                      className="h-12 w-auto rounded-md overflow-hidden"
+                      src={companyLogo}
+                      alt="Logo"
+                    />
+                  </Link>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    {navigation.map((item) => ( // Nav Links
-                      <NavLink
-                        key={item.name}
-                        to={item.visitTo}
-                        className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'rounded-md px-3 py-2 text-sm font-medium'
-                        )}
-                        aria-current={item.current ? 'page' : undefined}
-                      >
-                        {item.name}
-                      </NavLink>
-                    ))}
+                    {navigation.map(
+                      (
+                        item // Nav Links
+                      ) => (
+                        <NavLink
+                          key={item.name}
+                          to={item.visitTo}
+                          className={classNames(
+                            item.current
+                              ? "bg-gray-900 text-white"
+                              : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                            "rounded-md px-3 py-2 text-sm font-medium"
+                          )}
+                          aria-current={item.current ? "page" : undefined}
+                        >
+                          <button
+                            disabled={!user}
+                            style={{ cursor: !user ? "not-allowed" : "" }}
+                          >
+                            {item.name}
+                          </button>
+                        </NavLink>
+                      )
+                    )}
                   </div>
                 </div>
               </div>
+
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              <NavLink to="/analytics">
-              <button
-                  className="mx-3 relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View notifications</span>
-                    <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
-                  </NavLink>  
-                <NavLink to="/analytics">
-              <button
-                  className="mx-3 relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View notifications</span>
-                    <ChartBarIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
-                  </NavLink> 
+                {/* Place for search */}
 
-                  <NavLink to="/chatbox">                    
-                <button
-                  type="button"
-                  className="mx-3 relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View notifications</span>
-                    <ChatBubbleOvalLeftEllipsisIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
-                    </NavLink>  
+                <div className="searchbox w-32">
+                  <input
+                    type="text"
+                    value={searchProduct}
+                    onChange={(e) => setSearchProduct(e.target.value)}
+                    placeholder="Search..."
+                  />
+                  <Link to={`/search?product=${searchProduct}`}>
+                    <SearchIcon />
+                  </Link>
+                </div>
 
-                    <NavLink to="/notifications" className="notifi__icon">
-
-                <button
-                  type="button"
-                  className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                {/* <NavLink to="/analytics">
+                  <button
+                    disabled={!user}
+                    style={{ cursor: !user ? "not-allowed" : "" }}
+                    className="mx-3 relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                   >
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-        {notifications.length > 0 && <div></div>}
-                  
-                </button>
-                  </NavLink>
+                    <span className="absolute -inset-1.5" />
+                    <span className="sr-only">View notifications</span>
+                    <MagnifyingGlassIcon
+                      className="h-6 w-6"
+                      aria-hidden="true"
+                    />
+                  </button>
+                </NavLink> */}
+                <NavLink to="/analytics">
+                  <button
+                    disabled={!user}
+                    style={{ cursor: !user ? "not-allowed" : "" }}
+                    className="mx-3 relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  >
+                    <span className="absolute -inset-1.5" />
+                    <span className="sr-only">View notifications</span>
+                    <ChartBarIcon className="h-6 w-6" aria-hidden="true" />
+                  </button>
+                </NavLink>
+
+                <NavLink to="/chatbox">
+                  <button
+                    disabled={!user}
+                    style={{ cursor: !user ? "not-allowed" : "" }}
+                    type="button"
+                    className="mx-3 relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  >
+                    <span className="absolute -inset-1.5" />
+                    <span className="sr-only">View notifications</span>
+                    <ChatBubbleOvalLeftEllipsisIcon
+                      className="h-6 w-6"
+                      aria-hidden="true"
+                    />
+                  </button>
+                </NavLink>
+
+                <NavLink to="/notifications" className="notifi__icon">
+                  <button
+                    disabled={!user}
+                    style={{ cursor: !user ? "not-allowed" : "" }}
+                    type="button"
+                    className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  >
+                    <span className="absolute -inset-1.5" />
+                    <span className="sr-only">View notifications</span>
+                    <BellIcon className="h-6 w-6" aria-hidden="true" />
+                    {notifications.length > 0 && <div></div>}
+                  </button>
+                </NavLink>
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
-                  <div>
-                    <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                      <span className="absolute -inset-1.5" />
-                      <span className="sr-only">Open user menu</span>
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        // src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        src={user.profileImage}
-                        alt=""
-                      />
-                    </Menu.Button>
-                  </div>
+                  {/* User Login Check: */}
+                  {!user ? (
+                    <div>
+                      <NavLink to="/login">
+                        <button
+                          type="button"
+                          className="mx-3 relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                        >
+                          <span className="absolute -inset-1.5" />
+                          <span className="sr-only">
+                            Navigate to login / register
+                          </span>
+                          <UserCircleIcon
+                            className="h-6 w-6"
+                            aria-hidden="true"
+                          />
+                        </button>
+                      </NavLink>
+                    </div>
+                  ) : (
+                    <div>
+                      <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                        <span className="absolute -inset-1.5" />
+                        <span className="sr-only">Open user menu</span>
+                        <img
+                          className="h-8 w-8 rounded-full"
+                          // src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          src={user.profileImage}
+                          alt=""
+                        />
+                      </Menu.Button>
+                    </div>
+                  )}
                   <Transition
                     as={Fragment}
                     enter="transition ease-out duration-100"
@@ -171,18 +238,25 @@ export default function Navbar() {
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <Menu.Item>
                         {({ active }) => (
-                          <Link to="/currentuserprofile"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          <Link
+                            to="/currentuserprofile"
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700"
+                            )}
                           >
                             Your Profile
-                            </Link>
+                          </Link>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
                           <p
-                          onClick={handleLogout}
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            onClick={handleLogout}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700"
+                            )}
                           >
                             Sign out
                           </p>
@@ -203,10 +277,12 @@ export default function Navbar() {
                   as="a"
                   href={item.href}
                   className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block rounded-md px-3 py-2 text-base font-medium'
+                    item.current
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    "block rounded-md px-3 py-2 text-base font-medium"
                   )}
-                  aria-current={item.current ? 'page' : undefined}
+                  aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}
                 </Disclosure.Button>
@@ -216,5 +292,5 @@ export default function Navbar() {
         </>
       )}
     </Disclosure>
-  )
+  );
 }
