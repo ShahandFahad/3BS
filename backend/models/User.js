@@ -36,9 +36,10 @@ const UserSchema = new mongoose.Schema(
     otpCode: {
       type: Number,
     },
+    // setting by default verified as OTP Verfication has been removed from user.js in routes
     verified: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     isAdmin: {
       type: Boolean,
