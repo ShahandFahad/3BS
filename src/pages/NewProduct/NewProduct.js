@@ -1,6 +1,7 @@
 import React from "react";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
+import Navbar2 from "../../components/Navbar/Navbar2";
 import ExchangeProductForm from "../../components/ProductForm/ExchangeProductForm";
 import ProductForm from "../../components/ProductForm/ProductForm";
 import "./NewProduct.css";
@@ -8,7 +9,7 @@ function NewProduct({ mode }) {
   return (
     <>
       {/* Navbar */}
-      <Navbar />
+      <Navbar2 />
 
       {/* New Product */}
       {mode === "sell" ? (

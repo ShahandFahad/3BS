@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import ExchangeProduct from "../../components/ExchangeProduct/ExchangeProduct";
 import Gallary from "../../components/Gallary/Gallary";
 import Navbar from "../../components/Navbar/Navbar";
+import Navbar2 from "../../components/Navbar/Navbar2";
 import ProductDetails from "../../components/ProductDetails/ProductDetails";
 import "./ExchangeProductDetail.css";
 import { useParams } from "react-router";
@@ -52,7 +53,8 @@ function ExchangeProductDetail({ id }) {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
+      <Navbar2 />
       <div className="exchange__product__detail">
         {/* Left */}
         <div className="left">

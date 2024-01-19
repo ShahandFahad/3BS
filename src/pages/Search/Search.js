@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useLocation } from "react-router-dom";
-import Navbar from "../../components/Navbar/Navbar";
+// import Navbar from "../../components/Navbar/Navbar";
+import Navbar2 from "../../components/Navbar/Navbar2";
 import SoldProduct from "../../components/SoldProducts/Product/Product";
 import { loader, oops } from "../../loader";
 import { publicRequest } from "../../requestMethods";
@@ -32,7 +33,8 @@ function Search() {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
+      <Navbar2 />
       <div className="search">
         <h1>Search for "{product}"</h1>
         {!loading ? (

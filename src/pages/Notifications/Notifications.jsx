@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Notifications.css";
 import Navbar from "../../components/Navbar/Navbar";
+import Navbar2 from "../../components/Navbar/Navbar2";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { publicRequest } from "../../requestMethods";
@@ -50,7 +51,8 @@ function Notifications() {
   };
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
+      <Navbar2 />
       <div className="notifications">
         <div className="notifi__left">
           <div className="notifi__left__header">
