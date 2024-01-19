@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import Navbar from "../../components/Navbar/Navbar";
+// import Navbar from "../../components/Navbar/Navbar";
+import Navbar2 from "../../components/Navbar/Navbar2";
 import Gallary from "../../components/Gallary/Gallary";
 import "./Product.css";
 import ProductDetails from "../../components/ProductDetails/ProductDetails";
@@ -12,7 +13,8 @@ function Product() {
 
   return (
     <div className="product">
-      <Navbar />
+      {/* <Navbar /> */}
+      <Navbar2 />
       <div className="product__container">
         <div className="container__left">
           <Gallary id={productId} />

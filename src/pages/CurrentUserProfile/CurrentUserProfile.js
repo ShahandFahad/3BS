@@ -11,13 +11,17 @@ import SoldProducts from "../../components/SoldProducts/SoldProducts";
 import "./CurrentUserProfile.css";
 import Favorite from "../../components/Favorite/Favorite";
 import { userRequest } from "../../requestMethods";
+
+import Navbar2 from "../../components/Navbar/Navbar2";
+
 function CurrentUserProfile() {
   const user = useSelector((state) => state.user);
   const [active, setActive] = useState(true);
 
   return (
     <>
-      <Navbar />
+      <Navbar2 />
+      {/* <Navbar /> */}
       <div className="profile">
         <div className="profile__left">
           {/* Profile Header */}

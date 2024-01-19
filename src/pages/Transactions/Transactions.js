@@ -1,6 +1,7 @@
 import React from "react";
 import "./Transactions.css";
-import Navbar from "../../components/Navbar/Navbar";
+// import Navbar from "../../components/Navbar/Navbar";
+import Navbar2 from "../../components/Navbar/Navbar2";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Sales from "../../components/Sales/Sales";
 import Profit from "../../components/Profit/Profit";
@@ -30,7 +31,8 @@ function Transactions() {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
+      <Navbar2 />
       <div className="transactions">
         {/* Sidebar */}
         <Sidebar />

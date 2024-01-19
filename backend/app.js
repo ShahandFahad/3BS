@@ -30,17 +30,17 @@ app.use(cors());
 connectToDatabase();
 
 // API's routes
-app.use("/serb/api/user", authRouter);
-app.use("/serb/api/product", sellProductRouter);
-app.use("/serb/api/exchangeproduct", exchangeProductRouter);
-app.use("/serb/api/conversation", conversationRouter);
-app.use("/serb/api/message", messageRouter);
-app.use("/serb/api/profileviews", profileRouter);
-app.use("/serb/api/productviews", productViewsRouter);
-app.use("/serb/api/transaction", transactionRouter);
-app.use("/serb/api/order", orderRouter);
-app.use("/serb/api/notifications", NotificationRouter);
-app.use("/serb/api/feedback", FeedbackRouter);
+app.use("/3bs/api/user", authRouter);
+app.use("/3bs/api/product", sellProductRouter);
+app.use("/3bs/api/exchangeproduct", exchangeProductRouter);
+app.use("/3bs/api/conversation", conversationRouter);
+app.use("/3bs/api/message", messageRouter);
+app.use("/3bs/api/profileviews", profileRouter);
+app.use("/3bs/api/productviews", productViewsRouter);
+app.use("/3bs/api/transaction", transactionRouter);
+app.use("/3bs/api/order", orderRouter);
+app.use("/3bs/api/notifications", NotificationRouter);
+app.use("/3bs/api/feedback", FeedbackRouter);
 
 // Listening to a server
 app.listen(process.env.PORT || 8000, () => {

@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
+import Navbar2 from "../../components/Navbar/Navbar2";
 import "./ChatBox.css";
 import SearchIcon from "@mui/icons-material/Search";
 import Chats from "../../components/Chats/Chats";
@@ -144,7 +145,8 @@ function ChatBox() {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
+      <Navbar2 />
       <div className="chatbox">
         {modal && (
           <div className="chat__modal">

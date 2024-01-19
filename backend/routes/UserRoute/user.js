@@ -11,16 +11,53 @@ const {
 // Send Email
 const sendEmail = (receiverName, receiverEmail, recieverOtp) => {
   // Step 1
+  // let transporter = nodemailer.createTransport({
+  //   service: "gmail",
+  //   auth: {
+  //     user: process.env.USER, // TODO: your gmail account
+  //     pass: process.env.PASS, // TODO: your gmail password
+  //   },
+  // });
+
   let transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    requireTLS: true,
     auth: {
-      user: process.env.USER, // TODO: your gmail account
-      pass: process.env.PASS, // TODO: your gmail password
+      user: process.env.USER,
+      pass: process.env.PASS,
     },
   });
+
+  // let transporter = nodemailer.createTransport({
+  //   host: "smtp.gmail.com",
+  //   port: 587,
+  //   secure: false, // true for 587, false for other ports
+  //   requireTLS: true,
+  //   auth: {
+  //     user: process.env.USER,
+  //     pass: process.env.PASS,
+  //   },
+  // });
+
+  // let mailOptions = {
+  //     from: 'from@gmail.com',
+  //     to: 'to@gmail.com',
+  //     subject: 'Sending Email using Node.js',
+  //     text: 'That was easy!'
+  // };
+
+  // transporter.sendMail(mailOptions, function(error, info){
+  //     if (error) {
+  //        console.log(error);
+  //     } else {
+  //         console.log('Email sent: ' + info.response);
+  //     }
+  // });
   // Step 2
   let mailOptions = {
-    from: "abdullahkhan12064@gmail.com", //  email sender
+    from: "abbilearn019@gmail.com", //  email sender
     to: receiverEmail, // email receiver
     subject: "SERB Confirmation",
     html: `Dear ${receiverName}, your OTP for <b>SERB</b> Verification is:  <h1>${recieverOtp}</h1>
@@ -60,9 +97,11 @@ router.post("/register", async (req, res) => {
       });
       const savedUser = await newUser.save();
       // Send Verification Email
-      res.status(200).json(savedUser);
-      savedUser &&
-        sendEmail(savedUser.fullName, savedUser.email, savedUser.otpCode);
+      res
+        .status(200)
+        .json({ message: "User Succssfully Registered", usr: savedUser });
+      // savedUser &&
+      //   sendEmail(savedUser.fullName, savedUser.email, savedUser.otpCode);
     } catch (err) {
       res.status(500).json(err.message);
     }
@@ -71,25 +110,25 @@ router.post("/register", async (req, res) => {
 
 // Before login a registered user, make sure to verify the OTP sent to his Email
 
-router.post("/verification", async (req, res) => {
-  const { email, otpCode } = req.body;
+// router.post("/verification", async (req, res) => {
+//   const { email, otpCode } = req.body;
 
-  try {
-    const checkUserWithOtp = await User.findOne({ email });
-    if (checkUserWithOtp.otpCode === otpCode) {
-      const verifiedUser = await checkUserWithOtp.updateOne({
-        $set: {
-          verified: true,
-        },
-      });
-      res.status(201).json({ message: "Verified Successfully", verifiedUser });
-    } else {
-      res.status(300).json("Invalid OTP");
-    }
-  } catch (err) {
-    res.status(500).json(err.message);
-  }
-});
+//   try {
+//     const checkUserWithOtp = await User.findOne({ email });
+//     if (checkUserWithOtp.otpCode === otpCode) {
+//       const verifiedUser = await checkUserWithOtp.updateOne({
+//         $set: {
+//           verified: true,
+//         },
+//       });
+//       res.status(201).json({ message: "Verified Successfully", verifiedUser });
+//     } else {
+//       res.status(300).json("Invalid OTP");
+//     }
+//   } catch (err) {
+//     res.status(500).json(err.message);
+//   }
+// });
 
 // Login a registered User
 
@@ -110,10 +149,12 @@ router.post("/login", async (req, res) => {
       if (realPassword !== req.body.password) {
         res.status(401).json(" Password is Incorrect");
         return false;
-      } else if (realPassword === req.body.password && !user.verified) {
-        res.status(401).json("User is not verified");
-        return false;
-      } else {
+      }
+      // else if (realPassword === req.body.password && !user.verified) {
+      //   res.status(401).json("User is not verified");
+      //   return false;
+      // }
+      else if (realPassword === req.body.password) {
         // Create Token
         const token = JWT.sign(
           {
@@ -142,7 +183,7 @@ router.post("/forgotpassword", async (req, res) => {
     // Check if the user exist with the same email or not
     if (user.email === email) {
       // Fresh OTP
-      freshOtp = Math.floor(1000 + Math.floor(Math.random() * 9000));
+      let freshOtp = Math.floor(1000 + Math.floor(Math.random() * 9000));
       await User.updateOne({
         email,
         $set: {

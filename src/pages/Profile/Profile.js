@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
+import Navbar2 from "../../components/Navbar/Navbar2";
 import ProfileHeader from "../../components/ProfileHeader/ProfileHeader";
 import Rating from "../../components/Rating/Rating";
 import Reviews from "../../components/Reviews/Reviews";
@@ -28,7 +29,8 @@ function Profile() {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
+      <Navbar2 />
       <div className="profile">
         <div className="profile__left">
           {/* Profile Header */}
