@@ -19,4 +19,5 @@ export const profileImages = [
   "https://thumbs.dreamstime.com/b/beautiful-muslim-woman-hijab-illustration-avatar-logo-black-white-vector-195801870.jpg",
   "https://i.pinimg.com/originals/29/05/5c/29055c6a885149c26de060eb84b95519.jpg",
   "https://i.pinimg.com/736x/6d/d0/6b/6dd06bf4a7bf7d3f9ef972d604b19587.jpg",
+  "https://png.pngtree.com/thumb_back/fh260/background/20230612/pngtree-man-wearing-glasses-is-wearing-colorful-background-image_2905240.jpg",
 ];

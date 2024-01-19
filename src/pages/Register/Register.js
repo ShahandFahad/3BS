@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { publicRequest } from "../../requestMethods";
 import { profileImages } from "./profileImage";
 import "./Register.css";
@@ -7,6 +7,9 @@ import { loader } from "../../loader";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LOG_IN } from "../../redux/User/userTypes";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import logo from "./3BS-logo.jpg";
 
@@ -27,6 +30,35 @@ function Register() {
   // Navigate Hook
   const navigate = useNavigate();
   const { state } = useLocation();
+
+  // Message on success registeration
+  const [userRegistered, setUserRegistered] = useState(false);
+  const [failedRegistered, setFailedRegistered] = useState(false);
+  const notify = () => {
+    if (userRegistered)
+      return toast.info("🦄 Registeration Successfull !!!", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    if (failedRegistered)
+      return toast.warn("🦄 Registeration Failed !!!", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+  };
+
   // User Registration
   const handleRegistration = async () => {
     if (
@@ -48,14 +80,26 @@ function Register() {
       try {
         setLoading(true);
         const newUser = await publicRequest.post("/user/register", {
-          profileImage: profileImages[Math.floor(Math.random(0, 19) * 19)],
+          // Setting Default Profile image: Last index imndex image
+          // profileImage: profileImages[Math.floor(Math.random(0, 19) * 19)],
+          profileImage: profileImages[profileImages.length - 1],
           fullName,
           email,
           password,
           dob: birthDay + " " + birthMonth + ", " + birthYear,
           gender,
         });
-        navigate("/verifyotp", { state: { Email: newUser.data.email } });
+        // navigate("/verifyotp", { state: { Email: newUser.data.email } });
+        // Set user register status for toast display
+        if (newUser.status === 200) {
+          setUserRegistered(true);
+          // notify();
+          // navigate("/login");
+        } else {
+          // navigate("/");
+          setFailedRegistered(true);
+        }
+
         setLoading(false);
       } catch (err) {
         setLoading(false);
@@ -64,6 +108,30 @@ function Register() {
       }
     }
   };
+
+  // Display toast based on registeration status
+  useEffect(() => {
+    // Display Success or Warninig Toast: and Then Wait for 1.5 Sec the naviagate to other route
+    if (userRegistered) {
+      notify();
+      // wait 1.6 sec
+      const timer = setTimeout(() => {
+        navigate("/login"); //goto
+      }, 1600);
+
+      return () => clearTimeout(timer);
+    }
+
+    if (failedRegistered) {
+      notify();
+      // Wait 1.6sec
+      const timer = setTimeout(() => {
+        navigate("/"); // goto
+      }, 1600);
+
+      return () => clearTimeout(timer);
+    }
+  }, [userRegistered, failedRegistered]);
 
   const days = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
@@ -233,6 +301,10 @@ function Register() {
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        {/* Toast to be displayed on user registeration: fail or success */}
+        <ToastContainer />
       </div>
     </div>
   );
