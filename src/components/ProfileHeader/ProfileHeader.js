@@ -42,27 +42,42 @@ function ProfileHeader({ userDetails }) {
   return (
     <div className="profile__header">
       {/* Edit button */}
-      {userDetails._id === user._id && (
-        <div className="edit__profile" onClick={() => setShow(true)}>
+      {/* {userDetails._id === user._id && (
+        <div className="" onClick={() => setShow(true)}>
           <EditIcon />
         </div>
-      )}
+      )} */}
       {/* Edit Container */}
       {show && <EditContainer setShow={setShow} />}
 
-      <img className="profile__img" src={userDetails.profileImage} />
+      <img
+        class="h-20 w-20 object-cover rounded-full border-gray-400 border"
+        src={userDetails.profileImage}
+        alt="profile"
+      />
       <div className="profile__info">
-        <p className="info__name">{userDetails.fullName}</p>
-        <p className="info__from">{sinceJoin}</p>
-        <div className="info__views">
-          <VisibilityOutlinedIcon />
-          <p>{views.length} </p>
+        <p className="text-lg font-bold uppercase">{userDetails.fullName}</p>
+        <p className="text-l uppercase">{sinceJoin}</p>
+        <div className="flex gap-2 justify-center items-center">
+          <div className="info__views bg-slate-600 rounded-md flex-1">
+            <VisibilityOutlinedIcon />
+            <p>{views.length} </p>
+          </div>
+          {/* EDIt profile button */}
+          {userDetails._id === user._id && (
+            <div
+              className="bg-green-500 rounded-full flex justify-center items-center p-2 text-center text-white cursor-pointer"
+              onClick={() => setShow(true)}
+            >
+              <EditIcon />
+            </div>
+          )}
         </div>
       </div>
-      <img
+      {/* <img
         className="level__img"
         src="https://static.vecteezy.com/system/resources/previews/004/946/876/non_2x/winner-badge-concepts-vector.jpg"
-      />
+      /> */}
     </div>
   );
 }

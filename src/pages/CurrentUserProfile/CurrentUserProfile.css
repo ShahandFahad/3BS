@@ -1,42 +1,41 @@
-.profile__right{
-    padding: 20px;
-    width:  60%;
+.profile__right {
+  padding: 20px;
+  width: 60%;
 }
-.right__header{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 90%;
-    margin: auto;
-    margin-bottom: 20px;
+.right__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* width: 90%; */
+  margin: auto;
+  margin-bottom: 20px;
 }
-.profile__right .header__left p{
-    margin: 0 10px;
-    font-size: 18px;
-    font-weight: 400;
-    cursor: pointer;
+.profile__right .header__left p {
+  margin: 0 10px;
+  font-size: 18px;
+  font-weight: 400;
+  cursor: pointer;
 }
-.header__left .all{
-    border: 1px solid #d4d4d4;
-    padding: 5px 10px;
-    border-radius: 10px;
-    transition: .2s;
+.header__left .all {
+  border: 1px solid #d4d4d4;
+  padding: 5px 10px;
+  border-radius: 10px;
+  transition: 0.2s;
 }
-.header__left .all:hover{
-    background-color: #7e7d7d;
-    color: #fff;
+.header__left .all:hover {
+  background-color: #7e7d7d;
+  color: #fff;
 }
-.profile__right .header__right .new__btn{
-    border: none;
-    outline: none;
-    background-color: #4d4d4d;
-    color: #fff;
-    padding: 7px 15px;
-    font-size: 16px;
-    border-radius: 5px;
-    transition: .2s;
+.profile__right .header__right .new__btn {
+  border: none;
+  outline: none;
+  color: #fff;
+  padding: 7px 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: 0.2s;
 }
-.profile__right .header__right .new__btn:hover{
-    background-color: #353535;
-    cursor: pointer;
+.profile__right .header__right .new__btn:hover {
+  background-color: #353535;
+  cursor: pointer;
 }

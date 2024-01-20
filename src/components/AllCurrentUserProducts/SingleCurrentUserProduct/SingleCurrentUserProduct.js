@@ -75,11 +75,28 @@ function SingleCurrentUserProduct({ product, mode }) {
     <div className="single__current__user__product">
       <img src={product.photos[0]} />
       <p className="title">{product.title}</p>
-      <div className="titleviews">Views {productViews?.length}</div>
+      <div className="flex gap-2 bg-gray-700 p-2 text-sm text-white rounded">
+        <span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="w-6 h-6"
+          >
+            <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+            <path
+              fill-rule="evenodd"
+              d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </span>{" "}
+        <span>{productViews?.length}</span>
+      </div>
       {product.condition && <p className="title">{product.condition}</p>}
       <p className="price">
         {currencyFormatter.format(product.price, { code: "" })}
-        <span>(PKR)</span>
+        <span>(Pkr)</span>
       </p>
       <Link
         to={
@@ -91,13 +108,15 @@ function SingleCurrentUserProduct({ product, mode }) {
           product.status === "Sold" ||
           product.status === "exchanged" ||
           product.status === "sold"
-            ? { backgroundColor: "#4D4D4D" }
-            : { backgroundColor: "#138D95" }
+            ? { backgroundColor: "#111827" }
+            : { backgroundColor: "#22c55e" }
         }
       >
-        {product.status === "exchange"
-          ? "EXCHANGE NOW"
-          : product.status.toUpperCase()}
+        {product.status === "exchange" ? (
+          "EXCHANGE NOW"
+        ) : (
+          <span className="font-bold">{product.status.toUpperCase()}</span>
+        )}
       </Link>
 
       <p className="createdAt">{productDate}</p>
