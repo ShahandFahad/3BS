@@ -21,19 +21,30 @@ function EditContainer({ setShow }) {
     <>
       {/* Edit container */}
       <div className="edit__container">
-        <div className="container__content">
+        <div className="container__content mt-10 mb-4">
           <div className="register__form">
             {/* Close btn */}
             <div
-              className="register__form__close"
+              className="register__form__close mt-4"
               onClick={() => setShow(false)}
             >
               <CloseIcon />
             </div>
 
-            <h2 className="logo">
+            <div className="w-full max-w-sm border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-4 m-4 ">
+              {details ? (
+                <h2>
+                  <pre className="text-white text-center">Your Details</pre>
+                </h2>
+              ) : (
+                <h2 className="text-center text-white text-2xl">
+                  <pre className="text-white text-center"> Edit Profile </pre>
+                </h2>
+              )}
+            </div>
+            {/* <h2 className="logo">
               {details ? "Your Details" : "Edit Profile"}
-            </h2>
+            </h2> */}
             {error && (
               <div className="error__box">
                 <p>{error}</p>
@@ -46,13 +57,13 @@ function EditContainer({ setShow }) {
                 onClick={() => setDetails(true)}
                 className={details ? "active" : ""}
               >
-                Details
+                <span className="uppercase">Details</span>
               </p>
               <p
                 onClick={() => setDetails(false)}
                 className={!details ? "active" : ""}
               >
-                Edit
+                <span className="uppercase">Edit</span>
               </p>
             </div>
 
