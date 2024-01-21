@@ -1,155 +1,165 @@
-.single__input{
-    margin: 10px 0;
+.single__input {
+  margin: 20px 0;
 }
-.single__input .label{
-    margin-bottom: 5px;
-    font-weight: 500;
-    color:var(--primary-color);
-    font-size: 16px;
+.single__input .label {
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: var(--primary-color);
+  font-size: 16px;
 }
-.single__input input[type ='text' ], .single__input input[type = 'number']{
-    width: 80%;
-    border: 1px solid #ccc;
-    padding: 7px;
-    border-radius: 5px;
-    outline: none;
-    font-size: 16px;
+.single__input input[type="text"],
+.single__input input[type="number"] {
+  width: 80%;
+  border: 1px solid #ccc;
+  padding: 7px;
+  border-radius: 5px;
+  outline: none;
+  font-size: 16px;
 }
-.single__input input[type ='text']:focus, .single__input textarea:focus
-{
-    border-color: var(--primary-color);
+.single__input input[type="text"]:focus,
+.single__input textarea:focus {
+  border-color: var(--primary-color);
 }
-.single__input select{
-    padding: 5px;
-    outline: none;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.single__input select {
+  padding: 5px;
+  outline: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
-.single__input select option{
-    font-size: 14px;
+.single__input select option {
+  font-size: 14px;
 }
-.single__input .desc{
-    min-height: 100px;
-    width: 80%;
-    border: 1px solid #ccc;
-    padding: 7px;
-    border-radius: 5px;
-    outline: none;
-    font-size: 16px;
-    resize: none;
+.single__input .desc {
+  min-height: 100px;
+  width: 80%;
+  border: 1px solid #ccc;
+  padding: 7px;
+  border-radius: 5px;
+  outline: none;
+  font-size: 16px;
+  resize: none;
 }
-.modal__location{
-width: 25%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+.modal__location {
+  width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
-.modal__location .modal__location__box{
-    display: flex;
-    align-items: center;
-    background-color: var(--primary-color);
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 14px;
-    width: 120px;
-    justify-content: center;
-    margin-right: 30px;
-   
-   
+.modal__location .modal__location__box {
+  display: flex;
+  align-items: center;
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  width: 120px;
+  justify-content: center;
+  margin-right: 30px;
 }
-.modal__location .MuiSvgIcon-root{
-    font-size: 16px;
-    margin-right: 5px;
+.modal__location .MuiSvgIcon-root {
+  font-size: 16px;
+  margin-right: 5px;
 }
-.input__conidtion{
-    display: flex;
-    align-items: center;
+.input__conidtion {
+  display: flex;
+  align-items: center;
 }
-.input__conidtion label{
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin-right: 25px;
-    cursor: pointer;
-
+.input__conidtion label {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-right: 25px;
+  cursor: pointer;
 }
-.input__conidtion label p{
-    margin-left: 5px;
+.input__conidtion label p {
+  margin-left: 5px;
 }
-.price__input{
-    position: relative;
-    width:160px;
+.price__input {
+  position: relative;
+  width: 160px;
 }
-.single__input .pkr{
-position: absolute;
-right: 0;
-bottom: 0;
-font-weight: bold;
-color: var(--primary-color);
-user-select: none;
+.single__input .pkr {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-weight: bold;
+  color: var(--primary-color);
+  user-select: none;
 }
-.input__photos .MuiSvgIcon-root{
-    font-size: 60px;
-   margin: 10px;
-    color: var(--primary-color);
+.input__photos .MuiSvgIcon-root {
+  font-size: 60px;
+  margin: 10px;
+  color: var(--primary-color);
 }
-.input__photos .MuiSvgIcon-root:hover{
-    color: rgb(107, 107, 107);
-    cursor: pointer;
+.input__photos .MuiSvgIcon-root:hover {
+  color: rgb(107, 107, 107);
+  cursor: pointer;
 }
-.input__photos img{
-    width: 100px;
-    height: 100px;
-    border:1px solid #ccc;
-    margin-right: 7px;
+.input__photos img {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #ccc;
+  margin-right: 7px;
 }
-.input__photos img:hover{
-cursor: pointer;
-border-color: var(--primary-color);
-
+.input__photos img:hover {
+  cursor: pointer;
+  border-color: var(--primary-color);
 }
-.submit__section{
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
+.submit__section {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }
-.submit__section button{
-    border: none;
-    outline: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    width: 100px;
-    margin: 5px;
-    border: 1px solid transparent;
-    cursor: pointer;
+/* .submit__section button {
+  border: none;
+  outline: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  width: 100px;
+  margin: 5px;
+  border: 1px solid transparent;
+  cursor: pointer;
+} */
+.btn-submit-custom button {
+  border: none;
+  outline: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  width: 100px;
+  margin: 5px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  color: white;
 }
-.submit__section .cancel__button{
-    background-color: transparent;
-    border-color: var(--primary-color);
+/* .submit__section .cancel__button {
+  background-color: transparent;
+  border-color: var(--primary-color);
 }
-.submit__section .post__button{
-    background-color: var(--primary-color);
-color: #fff;
+.submit__section .post__button {
+  background-color: var(--primary-color);
+  color: #fff;
+} */
+.post__button:hover {
+  background-color: rgb(29, 115, 235);
 }
-.post__button:hover{
-    background-color: rgb(110, 110, 110);
-    
+.cancel__button:hover {
+  background-color: rgba(244, 30, 30, 0.425);
 }
-.cancel__button:hover{
-    background-color: rgba(207, 207, 207, 0.425);
-    
-}
-.input__photos #file1, #file2, #file3, #file4,#file5{
-    display: none;
+.input__photos #file1,
+#file2,
+#file3,
+#file4,
+#file5 {
+  display: none;
 }
 /* error */
-.form .error{
-    background-color: rgba(241, 24, 24, 0.863);
-    width: 100%;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
+.form .error {
+  background-color: rgba(241, 24, 24, 0.863);
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
 }
