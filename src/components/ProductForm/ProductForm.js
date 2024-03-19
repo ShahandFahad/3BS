@@ -10,7 +10,13 @@ import { useNavigate } from "react-router";
 import { loader } from "../../loader";
 import { InfinitySpin } from "react-loader-spinner";
 
-function ProductForm({ behave, product }) {
+function ProductForm({
+  behave,
+  product,
+  title,
+  setDisplayOptionButtons,
+  setDisplayForm,
+}) {
   const user = useSelector((state) => state.user);
   const [error, setError] = useState("");
 
@@ -156,64 +162,245 @@ function ProductForm({ behave, product }) {
     }
   };
 
+  // Handle Cancel: Hide from and Display Sell Options
+  const handleCancelBtn = (e) => {
+    setDisplayOptionButtons("block"); // Displays Sell Options
+    setDisplayForm(false); // Hide form
+  };
+
   return behave !== "edit" ? (
     <>
       <>
         <>
-          <div className="space-y-12">
+          <div className="space-y-12 px-36">
             {error && (
               <div className="error">
                 <p>{error}</p>
               </div>
             )}
-            <div className="border-b border-gray-900/10 pb-12">
-              <h1 className="text-2xl font-semibold leading-7 text-gray-900">
-                Add New Product For Selling
+            <div style={{ width: "100%" }} className="pb-12">
+              <h1 className="text-4xl text-center uppercase p-10 font-semibold leading-7 text-gray-900">
+                {/* Add New Product For Selling */}
+                {title}
               </h1>
 
-              {/* Category */}
-              <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                <div className="sm:col-span-4">
-                  <label
-                    htmlFor="username"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Title
-                  </label>
-                  <div className="mt-2">
-                    <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                      <input
-                        type="text"
-                        name="username"
-                        id="username"
-                        autoComplete="username"
-                        className="block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                        placeholder="Product name..."
-                        value={newProduct.title}
-                        onChange={(e) =>
-                          setNewProduct({
-                            ...newProduct,
-                            title: e.target.value,
-                          })
-                        }
-                      />
-                    </div>
-                  </div>
+              <div
+                style={{ width: "100%" }}
+                class="flex flex-col gap-4 items-center"
+              >
+                {/* List for  */}
+                <div className="w-96 flex rounded shadow-sm ring-1 ring-gray-300 sm:max-w-md">
+                  <input
+                    className="h-12 block flex-1 border-0 bg-green-100 py-1.5 pl-3 text-gray-900 sm:text-sm sm:leading-6"
+                    value={title}
+                  />
+                </div>
+                {/* Product Name */}
+                <div className="w-96 flex rounded shadow-sm ring-1 ring-inset ring-gray-300 sm:max-w-md">
+                  <input
+                    type="text"
+                    name="username"
+                    id="username"
+                    autoComplete="username"
+                    className="h-12 block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-600 sm:text-sm sm:leading-6"
+                    placeholder="Product Name"
+                    value={newProduct.title}
+                    onChange={(e) =>
+                      setNewProduct({
+                        ...newProduct,
+                        title: e.target.value,
+                      })
+                    }
+                  />
                 </div>
 
+                {/* Model: Hide for buyer request */}
+                {title !== "Buyer Request" && title !== "Rent" && (
+                  <div className="w-96 flex rounded shadow-sm ring-1 ring-inset ring-gray-300 sm:max-w-md">
+                    <input
+                      type="text"
+                      autoComplete="address-level2"
+                      className="h-12 block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-600 sm:text-sm sm:leading-6"
+                      placeholder="Model"
+                      value={newProduct.modal}
+                      onChange={(e) =>
+                        setNewProduct({ ...newProduct, modal: e.target.value })
+                      }
+                    />
+                  </div>
+                )}
+
+                {/* Address: Hide for buyer request */}
+                {title !== "Buyer Request" && (
+                  <div className="w-96 flex rounded shadow-sm ring-1 ring-inset ring-gray-300 sm:max-w-md">
+                    <input
+                      type="text"
+                      autoComplete="address-level1"
+                      className="h-12 block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-600 sm:text-sm sm:leading-6"
+                      placeholder="Address"
+                      value={newProduct.location}
+                      onChange={(e) =>
+                        setNewProduct({
+                          ...newProduct,
+                          location: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+                )}
+                {/* Price */}
+                {/*Hide Price for Bidding  */}
+                {title !== "Bidding" && (
+                  <div className="w-96 flex rounded shadow-sm ring-1 ring-inset ring-gray-300 sm:max-w-md">
+                    <input
+                      type="number"
+                      className="h-12 block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-600 sm:text-sm sm:leading-6"
+                      placeholder="Price"
+                      value={newProduct.price}
+                      onChange={(e) =>
+                        setNewProduct({ ...newProduct, price: e.target.value })
+                      }
+                    />
+                  </div>
+                )}
+                {/*  */}
+
+                {/* Auction Duration*/}
+                {title === "Bidding" && (
+                  <div className="w-96 flex rounded shadow-sm ring-1 ring-inset ring-gray-300 sm:max-w-md">
+                    <input
+                      type="number"
+                      className="h-12 block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-600 sm:text-sm sm:leading-6"
+                      placeholder="Auction Duration (Max 30 Days)"
+                      min={1}
+                      max={30}
+                    />
+                  </div>
+                )}
+
+                {/* Starting Bid*/}
+                {title === "Bidding" && (
+                  <div className="w-96 flex rounded shadow-sm ring-1 ring-inset ring-gray-300 sm:max-w-md">
+                    <input
+                      type="number"
+                      className="h-12 block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-600 sm:text-sm sm:leading-6"
+                      placeholder="Starting Bid"
+                      min={1}
+                    />
+                  </div>
+                )}
+
+                {/* Quantitiy*/}
+                {title === "Bidding" && (
+                  <div className="w-96 flex rounded shadow-sm ring-1 ring-inset ring-gray-300 sm:max-w-md">
+                    <input
+                      type="number"
+                      className="h-12 block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-600 sm:text-sm sm:leading-6"
+                      placeholder="Quantity"
+                      min={1}
+                    />
+                  </div>
+                )}
+                {/*  */}
+                {/* Category */}
+                <div className="mt-2">
+                  <select
+                    id="category"
+                    name="category"
+                    className="p-4 block w-96 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:max-w-xs sm:text-sm sm:leading-6"
+                    onChange={(e) =>
+                      setNewProduct({
+                        ...newProduct,
+                        category: e.target.value,
+                      })
+                    }
+                  >
+                    <option hidden>Category</option>
+                    <option value="Vehicles">Vehicles</option>
+                    <option value="Furniture">Furniture</option>
+                    <option value="Motercycles">Motercycles</option>
+                    <option value="Motercycles">Furniture</option>
+                    <option value="Motercycles">Vehicles</option>
+                    <option value="Motercycles">Mobile Phones</option>
+                    <option value="Motercycles">Computers</option>
+                    <option value="Motercycles">Toys</option>
+                    <option value="Motercycles">Houses</option>
+                    <option value="Motercycles">Accessories</option>
+                    <option value="Motercycles">Bikes</option>
+                    <option value="Motercycles">Cars</option>
+                  </select>
+                </div>
+
+                {/* List As*/}
+                {/* <div className="mt-2">
+                  <select
+                    id="category"
+                    name="category"
+                    className="p-4 block w-96 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:max-w-xs sm:text-sm sm:leading-6"
+                    onChange={(e) =>
+                      setNewProduct({
+                        ...newProduct,
+                        category: e.target.value,
+                      })
+                    }
+                  >
+                    <option hidden>List for</option>
+                    <option value="Vehicles">Barter</option>
+                    <option value="Furniture">Bidding</option>
+                    <option value="Motercycles">Rent</option>
+                  </select>
+                </div> */}
+
+                {/* Condition */}
+                <div className="input__conidtion">
+                  <label for="new">
+                    <input
+                      type="radio"
+                      id="new"
+                      name="conition"
+                      value="New"
+                      onChange={(e) =>
+                        setNewProduct({
+                          ...newProduct,
+                          condition: e.target.value,
+                        })
+                      }
+                      checked
+                    />
+                    <p>New</p>
+                  </label>
+                  <label for="used">
+                    <input
+                      type="radio"
+                      id="used"
+                      name="conition"
+                      value="Used"
+                      onChange={(e) =>
+                        setNewProduct({
+                          ...newProduct,
+                          condition: e.target.value,
+                        })
+                      }
+                    />
+                    <p>Used</p>
+                  </label>
+                </div>
+
+                {/* Description */}
                 <div className="col-span-full">
-                  <label
+                  {/* <label
                     htmlFor="about"
                     className="block text-sm font-medium leading-6 text-gray-900"
                   >
                     Description
-                  </label>
+                  </label> */}
                   <div className="mt-2">
                     <textarea
                       id="about"
                       name="about"
+                      placeholder="Write a few details about product."
                       rows={3}
-                      className="block w-full rounded-md border-0 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="block w-96 rounded-md border-0 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                       defaultValue={""}
                       value={newProduct.description}
                       onChange={(e) =>
@@ -224,261 +411,140 @@ function ProductForm({ behave, product }) {
                       }
                     />
                   </div>
-                  <p className="mt-3 text-sm leading-6 text-gray-600">
-                    Write a few details about product.
-                  </p>
                 </div>
 
-                {/* Model */}
-
-                <div className="sm:col-span-2 sm:col-start-1">
-                  <label
-                    htmlFor="city"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Model
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      type="text"
-                      autoComplete="address-level2"
-                      className="block w-full rounded-md border-0 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      placeholder="Model..."
-                      value={newProduct.modal}
-                      onChange={(e) =>
-                        setNewProduct({ ...newProduct, modal: e.target.value })
-                      }
-                    />
-                  </div>
-                </div>
-
-                <div className="sm:col-span-2">
-                  <label
-                    htmlFor="region"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Location
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      type="text"
-                      autoComplete="address-level1"
-                      className="block w-full rounded-md border-0 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      placeholder="Address..."
-                      value={newProduct.location}
-                      onChange={(e) =>
-                        setNewProduct({
-                          ...newProduct,
-                          location: e.target.value,
-                        })
-                      }
-                    />
-                  </div>
-                </div>
-                <div className="sm:col-span-2">
-                  <label
-                    htmlFor="postal-code"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Price
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      type="number"
-                      className="block w-full rounded-md border-0 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      placeholder="Price Pkr..."
-                      value={newProduct.price}
-                      onChange={(e) =>
-                        setNewProduct({ ...newProduct, price: e.target.value })
-                      }
-                    />
-                  </div>
-                </div>
-
-                {/* Category */}
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="category"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Category
-                  </label>
-                  <div className="mt-2">
-                    <select
-                      id="category"
-                      name="category"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                      onChange={(e) =>
-                        setNewProduct({
-                          ...newProduct,
-                          category: e.target.value,
-                        })
-                      }
-                    >
-                      <option hidden>Category</option>
-                      <option value="Vehicles">Vehicles</option>
-                      <option value="Furniture">Furniture</option>
-                      <option value="Motercycles">Motercycles</option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* Display For */}
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="category"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    List as
-                  </label>
-                  <div className="mt-2">
-                    <select
-                      id="category"
-                      name="category"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                      // onChange={(e) =>
-                      //   setNewProduct({
-                      //     ...newProduct,
-                      //     category: e.target.value,
-                      //   })
-                      // }
-                    >
-                      <option hidden>Options</option>
-                      <option value="Vehicles">Barter</option>
-                      <option value="Furniture">Bidding</option>
-                      <option value="Motercycles">Rent</option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* Condition */}
+                {/* Images Section */}
                 <div className="single__input">
-                  <p className="label">Condition</p>
-                  <div className="input__conidtion">
-                    <label for="new">
+                  {/* <h1 className="text-l font-semibold leading-7 text-gray-900">
+                    Upload up to 5 photos
+                  </h1> */}
+                  <div className="input__photos flex flex-wrap p-2 gap-2">
+                    <label htmlFor="file1">
+                      {showImg.showImg1 !== null ? (
+                        <img
+                          class="object-contain w-24 h-24"
+                          src={showImg.showImg1}
+                          alt=""
+                        />
+                      ) : (
+                        <AddAPhotoIcon />
+                      )}
                       <input
-                        type="radio"
-                        id="new"
-                        name="conition"
-                        value="New"
+                        type="file"
+                        id="file1"
                         onChange={(e) =>
-                          setNewProduct({
-                            ...newProduct,
-                            condition: e.target.value,
-                          })
+                          handleChange(e.target.files[0], "first")
                         }
-                        checked
                       />
-                      <p>New</p>
                     </label>
-                    <label for="used">
+                    <label htmlFor="file2">
+                      {showImg.showImg2 !== null ? (
+                        <img
+                          src={showImg.showImg2}
+                          class="object-contain w-24 h-24"
+                          alt=""
+                        />
+                      ) : (
+                        <AddAPhotoIcon />
+                      )}
                       <input
-                        type="radio"
-                        id="used"
-                        name="conition"
-                        value="Used"
+                        type="file"
+                        id="file2"
                         onChange={(e) =>
-                          setNewProduct({
-                            ...newProduct,
-                            condition: e.target.value,
-                          })
+                          handleChange(e.target.files[0], "second")
                         }
                       />
-                      <p>Used</p>
+                    </label>
+                    <label htmlFor="file3">
+                      {showImg.showImg3 !== null ? (
+                        <img
+                          src={showImg.showImg3}
+                          alt=""
+                          class="object-contain w-24 h-24"
+                        />
+                      ) : (
+                        <AddAPhotoIcon />
+                      )}
+                      <input
+                        type="file"
+                        id="file3"
+                        onChange={(e) =>
+                          handleChange(e.target.files[0], "third")
+                        }
+                      />
+                    </label>
+                    <label htmlFor="file4">
+                      {showImg.showImg4 !== null ? (
+                        <img
+                          src={showImg.showImg4}
+                          alt=""
+                          class="object-contain w-24 h-24"
+                        />
+                      ) : (
+                        <AddAPhotoIcon />
+                      )}
+                      <input
+                        type="file"
+                        id="file4"
+                        onChange={(e) =>
+                          handleChange(e.target.files[0], "fourth")
+                        }
+                      />
+                    </label>
+                    <label htmlFor="file5">
+                      {showImg.showImg5 !== null ? (
+                        <img
+                          src={showImg.showImg5}
+                          alt=""
+                          class="object-contain w-24 h-24"
+                        />
+                      ) : (
+                        <AddAPhotoIcon />
+                      )}
+                      <input
+                        type="file"
+                        id="file5"
+                        onChange={(e) =>
+                          handleChange(e.target.files[0], "fifth")
+                        }
+                      />
                     </label>
                   </div>
                 </div>
-              </div>
-              {/* Images Section */}
-              <div className="single__input">
-                <h1 className="text-l font-semibold leading-7 text-gray-900">
-                  Upload up to 5 photos
-                </h1>
-                <div className="input__photos flex flex-wrap p-2 gap-2">
-                  <label htmlFor="file1">
-                    {showImg.showImg1 !== null ? (
-                      <img
-                        class="object-contain w-24 h-24"
-                        src={showImg.showImg1}
-                        alt=""
-                      />
+
+                {/*  */}
+                <div className="btn-submit-custom flex items-center justify-end gap-x-6">
+                  <button
+                    type="button"
+                    className="h-14 bg-red-500 hover:bg-red-700"
+                    onClick={handleCancelBtn}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleClick}
+                    className="h-14 bg-green-500 hover:bg-green-700"
+                  >
+                    {!loading ? (
+                      "Post"
                     ) : (
-                      <AddAPhotoIcon />
-                    )}
-                    <input
-                      type="file"
-                      id="file1"
-                      onChange={(e) => handleChange(e.target.files[0], "first")}
-                    />
-                  </label>
-                  <label htmlFor="file2">
-                    {showImg.showImg2 !== null ? (
-                      <img
-                        src={showImg.showImg2}
-                        class="object-contain w-24 h-24"
-                        alt=""
+                      // <FidgetSpinner
+                      //   visible={true}
+                      //   height="40"
+                      //   width="60"
+                      //   ariaLabel="fidget-spinner-loading"
+                      //   wrapperStyle={{}}
+                      //   wrapperClass="fidget-spinner-wrapper"
+                      // />
+                      <InfinitySpin
+                        visible={true}
+                        width="60"
+                        height="30"
+                        color="#FFFFFF"
+                        ariaLabel="infinity-spin-loading"
                       />
-                    ) : (
-                      <AddAPhotoIcon />
                     )}
-                    <input
-                      type="file"
-                      id="file2"
-                      onChange={(e) =>
-                        handleChange(e.target.files[0], "second")
-                      }
-                    />
-                  </label>
-                  <label htmlFor="file3">
-                    {showImg.showImg3 !== null ? (
-                      <img
-                        src={showImg.showImg3}
-                        alt=""
-                        class="object-contain w-24 h-24"
-                      />
-                    ) : (
-                      <AddAPhotoIcon />
-                    )}
-                    <input
-                      type="file"
-                      id="file3"
-                      onChange={(e) => handleChange(e.target.files[0], "third")}
-                    />
-                  </label>
-                  <label htmlFor="file4">
-                    {showImg.showImg4 !== null ? (
-                      <img
-                        src={showImg.showImg4}
-                        alt=""
-                        class="object-contain w-24 h-24"
-                      />
-                    ) : (
-                      <AddAPhotoIcon />
-                    )}
-                    <input
-                      type="file"
-                      id="file4"
-                      onChange={(e) =>
-                        handleChange(e.target.files[0], "fourth")
-                      }
-                    />
-                  </label>
-                  <label htmlFor="file5">
-                    {showImg.showImg5 !== null ? (
-                      <img
-                        src={showImg.showImg5}
-                        alt=""
-                        class="object-contain w-24 h-24"
-                      />
-                    ) : (
-                      <AddAPhotoIcon />
-                    )}
-                    <input
-                      type="file"
-                      id="file5"
-                      onChange={(e) => handleChange(e.target.files[0], "fifth")}
-                    />
-                  </label>
+                  </button>
                 </div>
               </div>
             </div>
@@ -492,35 +558,6 @@ function ProductForm({ behave, product }) {
               </button>
             </div>
           </div> */}
-          <div className="btn-submit-custom mt-6 flex items-center justify-end gap-x-6">
-            <button type="button" className="bg-red-500 hover:bg-red-700">
-              Cancel
-            </button>
-            <button
-              onClick={handleClick}
-              className="bg-blue-500 hover:bg-blue-700"
-            >
-              {!loading ? (
-                "Post"
-              ) : (
-                // <FidgetSpinner
-                //   visible={true}
-                //   height="40"
-                //   width="60"
-                //   ariaLabel="fidget-spinner-loading"
-                //   wrapperStyle={{}}
-                //   wrapperClass="fidget-spinner-wrapper"
-                // />
-                <InfinitySpin
-                  visible={true}
-                  width="60"
-                  height="30"
-                  color="#FFFFFF"
-                  ariaLabel="infinity-spin-loading"
-                />
-              )}
-            </button>
-          </div>
         </>
       </>
       {/* 

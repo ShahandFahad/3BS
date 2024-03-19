@@ -5,20 +5,24 @@ import ProductForm from "../../components/ProductForm/ProductForm";
 
 export default function Sell() {
   const [checkedItem, setCheckedItem] = useState("");
+  const [displayOptionButtons, setDisplayOptionButtons] = useState("block");
+  const [displayForm, setDisplayForm] = useState(false);
   const options = [
     "Simple Sell",
     "Bidding",
     "Bartering",
     "Rent",
     "Buyer Request",
-    "",
   ];
 
   const selectOption = (e) => {
     setCheckedItem(e.target.value);
     // console.log("Item checked:", e.target.value);
+    setDisplayOptionButtons("hidden");
+    setDisplayForm(true);
   };
   console.log(checkedItem);
+  console.log(displayOptionButtons);
 
   return (
     <>
@@ -26,10 +30,12 @@ export default function Sell() {
       {/* <h2 class="text-4xl text-center text-slate-900 font-bold tracking-tight sm:text-6xl">
         SELL
       </h2> */}
-      <div class="mt-20 flex font-sans justify-center items-center">
+      <div
+        class={`mt-20 h-80 flex font-sans justify-center items-center ${displayOptionButtons}`}
+      >
         {/* <form class="flex-auto p-6"> */}
         <div class="flex items-baseline mt-4 mb-6 pb-6 border-slate-200 justify-center items-center">
-          <div class="grid grid-cols-2 gap-4">
+          <div class="flex gap-4">
             {/* Iterate over options */}
             {options.map((element) => (
               <label>
@@ -49,7 +55,51 @@ export default function Sell() {
         </div>
         {/* </form> */}
       </div>
-      {/* {checkedItem === "Simple Sell" ? <h1>Simple Spell</h1> : ""} */}
+      {checkedItem === "Simple Sell" && displayForm ? (
+        <ProductForm
+          title={"Simple Sell"}
+          setDisplayOptionButtons={setDisplayOptionButtons}
+          setDisplayForm={setDisplayForm}
+        />
+      ) : (
+        ""
+      )}
+      {checkedItem === "Bidding" && displayForm ? (
+        <ProductForm
+          title={"Bidding"}
+          setDisplayOptionButtons={setDisplayOptionButtons}
+          setDisplayForm={setDisplayForm}
+        />
+      ) : (
+        ""
+      )}
+      {checkedItem === "Bartering" && displayForm ? (
+        <ProductForm
+          title={"Bartering"}
+          setDisplayOptionButtons={setDisplayOptionButtons}
+          setDisplayForm={setDisplayForm}
+        />
+      ) : (
+        ""
+      )}
+      {checkedItem === "Rent" && displayForm ? (
+        <ProductForm
+          title={"Rent"}
+          setDisplayOptionButtons={setDisplayOptionButtons}
+          setDisplayForm={setDisplayForm}
+        />
+      ) : (
+        ""
+      )}
+      {checkedItem === "Buyer Request" && displayForm ? (
+        <ProductForm
+          title={"Buyer Request"}
+          setDisplayOptionButtons={setDisplayOptionButtons}
+          setDisplayForm={setDisplayForm}
+        />
+      ) : (
+        ""
+      )}
       {/* <section className="p-10">
         <ProductForm />
       </section> */}

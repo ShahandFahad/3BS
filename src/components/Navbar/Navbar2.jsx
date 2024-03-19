@@ -25,7 +25,8 @@ import companyLogo from "./3BS-Logo.png";
 
 const navigation = [
   { name: "Buy", visitTo: "/", current: true },
-  { name: "Sell", visitTo: "/currentusersell", current: false },
+  { name: "Products", visitTo: "#", current: false },
+  // { name: "Sell", visitTo: "/currentusersell", current: false },
   { name: "Bartering", visitTo: "/exchangeproducts", current: false },
   { name: "Bidding", visitTo: "#", current: false },
   { name: "Rent", visitTo: "#", current: false },
@@ -265,6 +266,26 @@ export default function Navbar() {
                     </Menu.Items>
                   </Transition>
                 </Menu>
+                {/* Sell Features: Navigate to sell page  */}
+                <Link to="/currentusersell">
+                  <div className="display flex gap-2 w-24 cursor-pointer mx-2 rounded-full bg-green-600 p-2 text-white">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 4.5v15m7.5-7.5h-15"
+                      />
+                    </svg>
+                    SELL
+                  </div>
+                </Link>
               </div>
             </div>
           </div>
