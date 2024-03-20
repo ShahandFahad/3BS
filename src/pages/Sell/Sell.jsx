@@ -34,7 +34,7 @@ export default function Sell() {
         class={`mt-20 h-80 flex font-sans justify-center items-center ${displayOptionButtons}`}
       >
         {/* <form class="flex-auto p-6"> */}
-        <div class="flex items-baseline mt-4 mb-6 pb-6 border-slate-200 justify-center items-center">
+        <div class="flex items-baseline mt-4 mb-6 pb-6 border-slate-200 justify-center items-center ">
           <div class="flex gap-4">
             {/* Iterate over options */}
             {options.map((element) => (

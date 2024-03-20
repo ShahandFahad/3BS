@@ -25,7 +25,7 @@ import companyLogo from "./3BS-Logo.png";
 
 const navigation = [
   { name: "Buy", visitTo: "/", current: true },
-  { name: "Products", visitTo: "#", current: false },
+  // { name: "Products", visitTo: "#", current: false },
   // { name: "Sell", visitTo: "/currentusersell", current: false },
   { name: "Bartering", visitTo: "/exchangeproducts", current: false },
   { name: "Bidding", visitTo: "#", current: false },

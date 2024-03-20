@@ -23,7 +23,7 @@ const ProductSchema = new mongoose.Schema(
     },
     location: {
       type: String,
-      required: true,
+      // required: true,
     },
     condition: {
       type: String,
@@ -31,7 +31,7 @@ const ProductSchema = new mongoose.Schema(
     },
     price: {
       type: Number,
-      required: true,
+      // required: true,
     },
     photos: {
       type: Array,
@@ -41,8 +41,14 @@ const ProductSchema = new mongoose.Schema(
       type: String,
       default: "Available",
     },
+    listFor: String,
+    // For products when placed for auction
+    auctionDuration: String,
+    auctionStartingBid: String,
+    auctionQuantity: String,
   },
-  { timestamps: true }
+  { timestamps: true },
+  { ignoreUndefined: true }
 );
 
 module.exports = mongoose.model("products", ProductSchema);

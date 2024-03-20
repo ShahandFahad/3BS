@@ -32,6 +32,11 @@ function ProductForm({
     location: "",
     condition: "",
     price: null,
+    listFor: title,
+    // These fields are for products displayed as bid
+    auctionDuration: undefined,
+    auctionStartingBid: undefined,
+    auctionQuantity: undefined,
   });
   const [allPhotos, setAllPhotos] = useState([]);
   let sendAllphotos = [];
@@ -82,7 +87,8 @@ function ProductForm({
       !newProduct.category ||
       !newProduct.title ||
       !newProduct.description ||
-      !newProduct.location ||
+      // incase for buyer request do not need location
+      !(newProduct.location || title === "Buyer Request") ||
       !newProduct.condition ||
       allPhotos.length < 5
     ) {
@@ -111,11 +117,15 @@ function ProductForm({
                   category: newProduct.category,
                   title: newProduct.title,
                   description: newProduct.description,
-                  modal: newProduct.modal,
+                  modal: newProduct.modal || undefined,
                   location: newProduct.location,
                   condition: newProduct.condition,
-                  price: newProduct.price,
+                  price: newProduct.price || undefined,
                   photos: sendAllphotos,
+                  listFor: newProduct.listFor,
+                  auctionDuration: newProduct.auctionDuration,
+                  auctionStartingBid: newProduct.auctionStartingBid,
+                  auctionQuantity: newProduct.auctionQuantity,
                 });
                 navigate("/");
                 setLoading(false);
@@ -188,7 +198,7 @@ function ProductForm({
                 style={{ width: "100%" }}
                 class="flex flex-col gap-4 items-center"
               >
-                {/* List for  */}
+                {/* List for: Hardcoded value need to send for list type  */}
                 <div className="w-96 flex rounded shadow-sm ring-1 ring-gray-300 sm:max-w-md">
                   <input
                     className="h-12 block flex-1 border-0 bg-green-100 py-1.5 pl-3 text-gray-900 sm:text-sm sm:leading-6"
@@ -274,6 +284,12 @@ function ProductForm({
                       placeholder="Auction Duration (Max 30 Days)"
                       min={1}
                       max={30}
+                      onChange={(e) =>
+                        setNewProduct({
+                          ...newProduct,
+                          auctionDuration: e.target.value,
+                        })
+                      }
                     />
                   </div>
                 )}
@@ -286,6 +302,12 @@ function ProductForm({
                       className="h-12 block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-600 sm:text-sm sm:leading-6"
                       placeholder="Starting Bid"
                       min={1}
+                      onChange={(e) =>
+                        setNewProduct({
+                          ...newProduct,
+                          auctionStartingBid: e.target.value,
+                        })
+                      }
                     />
                   </div>
                 )}
@@ -298,6 +320,12 @@ function ProductForm({
                       className="h-12 block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-600 sm:text-sm sm:leading-6"
                       placeholder="Quantity"
                       min={1}
+                      onChange={(e) =>
+                        setNewProduct({
+                          ...newProduct,
+                          auctionQuantity: e.target.value,
+                        })
+                      }
                     />
                   </div>
                 )}
