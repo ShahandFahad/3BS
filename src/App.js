@@ -35,6 +35,9 @@ import PaymentCard from "./components/PaymentCard/PaymentCard";
 import Transactions from "./pages/Transactions/Transactions";
 import Notifications from "./pages/Notifications/Notifications";
 import Sell from "./pages/Sell/Sell";
+import Rent from "./pages/Rent/Rent";
+import BuyerRequest from "./pages/BuyerRequest/BuyerRequest";
+import ListForDetail from "./pages/ListForDetail/ListForDetail";
 
 function App() {
   return (
@@ -49,6 +52,12 @@ function App() {
           <Route path="/profile/:userId" element={<Profile />} />
           <Route path="/currentuserprofile" element={<CurrentUserProfile />} />
           <Route path="/currentusersell" element={<Sell />} />
+          <Route path="/rentproducts" element={<Rent />} />
+          <Route
+            path="/rentproductdetails/:productId"
+            element={<ListForDetail />}
+          />
+          <Route path="/buyerrequestproducts" element={<BuyerRequest />} />
           <Route path="/addsellproduct" element={<NewProduct mode="sell" />} />
           <Route path="/editproduct/:productId" element={<EditProduct />} />
           <Route
