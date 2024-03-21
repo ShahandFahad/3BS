@@ -29,8 +29,8 @@ const navigation = [
   // { name: "Sell", visitTo: "/currentusersell", current: false },
   { name: "Bartering", visitTo: "/exchangeproducts", current: false },
   { name: "Bidding", visitTo: "#", current: false },
-  { name: "Rent", visitTo: "#", current: false },
-  { name: "Buyer Request", visitTo: "#", current: false },
+  { name: "Rent", visitTo: "/rentproducts", current: false },
+  { name: "Buyer Request", visitTo: "/buyerrequestproducts", current: false },
 ];
 
 function classNames(...classes) {
