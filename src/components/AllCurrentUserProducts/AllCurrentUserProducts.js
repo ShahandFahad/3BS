@@ -76,11 +76,16 @@ function AllCurrentUserProducts({ mode }) {
               </tr>
             </thead>
             <tbody>
+              {/* In profile only display simple sell */}
               {!loading ? (
                 mode === "sell" ? (
-                  products.map((product) => (
-                    <SingleCurrentUserProduct product={product} mode={mode} />
-                  ))
+                  products.map((product) =>
+                    product.listFor === "Simple Sell" ? (
+                      <SingleCurrentUserProduct product={product} mode={mode} />
+                    ) : (
+                      <></>
+                    )
+                  )
                 ) : (
                   exchangeProducts.map((product) => (
                     <SingleCurrentUserProduct product={product} mode={mode} />
