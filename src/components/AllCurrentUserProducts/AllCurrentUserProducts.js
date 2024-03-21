@@ -44,33 +44,67 @@ function AllCurrentUserProducts({ mode }) {
     };
     getProducts();
   }, []);
-
   return (
-    <div className="all__current__user__products">
-      {!loading ? (
-        mode === "sell" ? (
-          products.map((product) => (
-            <SingleCurrentUserProduct product={product} mode={mode} />
-          ))
-        ) : (
-          exchangeProducts.map((product) => (
-            <SingleCurrentUserProduct product={product} mode={mode} />
-          ))
-        )
-      ) : (
-        <div
-          style={{
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            marginTop: "100px",
-          }}
-        >
-          <img src={loader} width={30} />
+    // <div className="all__current__user__products">
+    <>
+      <>
+        <div style={{ height: "100vh" }} class="overflow-x-auto shadow-md">
+          <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+              <tr>
+                <th scope="col" class="p-4">
+                  <div class="flex items-center">Image</div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Views
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Price (PKr)
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Condition
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Status
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {!loading ? (
+                mode === "sell" ? (
+                  products.map((product) => (
+                    <SingleCurrentUserProduct product={product} mode={mode} />
+                  ))
+                ) : (
+                  exchangeProducts.map((product) => (
+                    <SingleCurrentUserProduct product={product} mode={mode} />
+                  ))
+                )
+              ) : (
+                <div
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginTop: "100px",
+                  }}
+                >
+                  <img src={loader} width={30} alt="eximg" />
+                </div>
+              )}
+            </tbody>
+          </table>
         </div>
-      )}
-    </div>
+      </>
+    </>
+    // </div>
   );
 }
 
