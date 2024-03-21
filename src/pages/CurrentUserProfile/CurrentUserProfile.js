@@ -13,6 +13,8 @@ import Favorite from "../../components/Favorite/Favorite";
 import { userRequest } from "../../requestMethods";
 
 import Navbar2 from "../../components/Navbar/Navbar2";
+import CurrentUserRentalProducts from "../../components/RentalProducts/CurrentUserRentalProducts";
+import CurrentUserBuyerRequest from "../../components/BuyerRequestProducts/CurrentUserBuyerRequest";
 
 import styled from "styled-components";
 
@@ -91,6 +93,11 @@ function CurrentUserProfile() {
             </div>
             {/* All Products of Current User */}
             {active ? <AllCurrentUserProducts mode="sell" /> : <Favorite />}
+            {/*  Current User product listed as for rent*/}
+            <CurrentUserRentalProducts mode="rent" />
+
+            {/*Current User Product listed as for buyer request  */}
+            <CurrentUserBuyerRequest mode="Buyer Request" />
           </SellProduct>
         </div>
       </Profile>
