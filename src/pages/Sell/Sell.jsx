@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../../components/Navbar/Navbar2";
 import Footer from "../../components/Footer/Footer";
 import ProductForm from "../../components/ProductForm/ProductForm";
+import { Navigate } from "react-router";
 
 export default function Sell() {
   const [checkedItem, setCheckedItem] = useState("");
@@ -73,7 +74,12 @@ export default function Sell() {
       ) : (
         ""
       )}
-      {checkedItem === "Bartering" && displayForm ? (
+      {/* Navigate to Exchange Form. Which Post Products to seperate exchange document in the database */}
+      {checkedItem === "Bartering" && (
+        <Navigate to="/addexchangeproduct" replace={false} />
+      )}
+
+      {/* {checkedItem === "Bartering" && displayForm ? (
         <ProductForm
           title={"Bartering"}
           setDisplayOptionButtons={setDisplayOptionButtons}
@@ -81,7 +87,7 @@ export default function Sell() {
         />
       ) : (
         ""
-      )}
+      )} */}
       {checkedItem === "Rent" && displayForm ? (
         <ProductForm
           title={"Rent"}
