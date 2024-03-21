@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import "./AllCurrentUserProducts.css";
-import SingleCurrentUserProduct from "./SingleCurrentUserProduct/SingleCurrentUserProduct";
 import { publicRequest } from "../../requestMethods";
 import { useSelector } from "react-redux";
 import { loader } from "../../loader";
 
-function AllCurrentUserProducts({ mode }) {
+import RentalProductRow from "./RentalProductRow";
+import PublicRentRow from "./PublicRentRow";
+
+function RentalProducts({ mode }) {
   const user = useSelector((state) => state.user);
   const [products, setProducts] = useState([]);
+  const [rentalProducts, setRentalProducts] = useState([]);
   const [exchangeProducts, setExchangeProducts] = useState([]);
   // loading
   const [loading, setLoading] = useState(false);
@@ -25,30 +27,46 @@ function AllCurrentUserProducts({ mode }) {
         console.log(err.response.data);
       }
     };
-    getProducts();
-  }, []);
-
-  // fetch all Exchange product of current user
-  useEffect(() => {
-    setLoading(true);
-    const getProducts = async () => {
+    //
+    const getRentalProducts = async () => {
       try {
-        const fechedProducts = await publicRequest.get(
-          `/exchangeproduct/exchange/all/${user._id}`
+        // Fetch Products listed for rent
+        const response = await publicRequest.get(
+          `/product/product-listed-for/all/${user._id}/${"Rent"}`
         );
-        setExchangeProducts(fechedProducts.data.allProducts);
+        setRentalProducts(response.data.data);
         setLoading(false);
       } catch (err) {
         console.log(err.response.data);
       }
     };
+
     getProducts();
+    getRentalProducts();
   }, []);
+
+  // fetch all Exchange product of current user
+  //   useEffect(() => {
+  //     setLoading(true);
+  //     const getProducts = async () => {
+  //       try {
+  //         const fechedProducts = await publicRequest.get(
+  //           `/exchangeproduct/exchange/all/${user._id}`
+  //         );
+  //         setExchangeProducts(fechedProducts.data.allProducts);
+  //         setLoading(false);
+  //       } catch (err) {
+  //         console.log(err.response.data);
+  //       }
+  //     };
+  //     getProducts();
+  //   }, []);
   return (
     // <div className="all__current__user__products">
     <>
       <>
         <div style={{ height: "100vh" }} class="overflow-x-auto shadow-md">
+          <h1 className="text-2xl p-4">Products Listed for Rent</h1>
           <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
               <tr>
@@ -76,20 +94,14 @@ function AllCurrentUserProducts({ mode }) {
               </tr>
             </thead>
             <tbody>
-              {/* In profile only display simple sell */}
-              {!loading ? (
-                mode === "sell" ? (
-                  products.map((product) =>
-                    product.listFor === "Simple Sell" ? (
-                      <SingleCurrentUserProduct product={product} mode={mode} />
-                    ) : (
-                      <></>
-                    )
+              {/* Iterate over list of products and filter out products which are listed as rent */}
+              {!loading && mode === "rent" ? (
+                products.map((product) =>
+                  product.listFor === "Rent" ? (
+                    <RentalProductRow product={product} mode={mode} />
+                  ) : (
+                    <></>
                   )
-                ) : (
-                  exchangeProducts.map((product) => (
-                    <SingleCurrentUserProduct product={product} mode={mode} />
-                  ))
                 )
               ) : (
                 <div
@@ -104,6 +116,30 @@ function AllCurrentUserProducts({ mode }) {
                   <img src={loader} width={30} alt="eximg" />
                 </div>
               )}
+
+              {/* {!loading ? (
+                mode === "sell" ? (
+                  products.map((product) => (
+                    <RentalProductRow product={product} mode={mode} />
+                  ))
+                ) : (
+                  exchangeProducts.map((product) => (
+                    <RentalProductRow product={product} mode={mode} />
+                  ))
+                )
+              ) : (
+                <div
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginTop: "100px",
+                  }}
+                >
+                  <img src={loader} width={30} alt="eximg" />
+                </div>
+              )} */}
             </tbody>
           </table>
         </div>
@@ -113,4 +149,4 @@ function AllCurrentUserProducts({ mode }) {
   );
 }
 
-export default AllCurrentUserProducts;
+export default RentalProducts;

@@ -11,11 +11,13 @@ function ExchangeProducts() {
     <>
       {/* <Navbar /> */}
       <Navbar2 />
-      <div className="exchange__product">
-        <div className="exchange__header">
+      {/* <div className="exchange__product"> */}
+      <div>
+        {/* <div className="exchange__header">
           <h1>All Products for Exchange</h1>
           <Link to="/addexchangeproduct">Add New Product</Link>
-        </div>
+        </div> */}
+
         <AllCurrentUserProducts mode="exchange" />
       </div>
       {/* <Footer /> */}

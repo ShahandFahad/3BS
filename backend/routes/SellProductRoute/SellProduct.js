@@ -6,16 +6,35 @@ const {
   verifyToken,
   verifyTokenAndAdmin,
 } = require("../../routes/UserRoute/verifyToken");
+
+// Sell Product Controller
+const sellProductController = require("../../controllers/sellProductController");
+
 // Add product
-router.post("/sell/add", verifyToken, async (req, res) => {
-  const newProduct = new Product(req.body);
-  try {
-    const savedProduct = await newProduct.save();
-    res.status(200).json(savedProduct);
-  } catch (err) {
-    res.status(500).json(err.message);
-  }
-});
+router.post(
+  "/sell/add",
+  verifyToken,
+  sellProductController.createNewSellProduct
+);
+
+// Get all rental products list for rent, buyer request etc. For public, exclude user id
+router.get(
+  "/product-listed-for/all/:userId/:listFor",
+  // verifyToken,
+  sellProductController.getProductsListedFor
+);
+
+// router.post("/sell/add", verifyToken, async (req, res) => {
+//   console.log("Posting Product");
+//   console.log(req.body);
+//   const newProduct = new Product(req.body);
+//   try {
+//     const savedProduct = await newProduct.save();
+//     res.status(200).json(savedProduct);
+//   } catch (err) {
+//     res.status(500).json(err.message);
+//   }
+// });
 
 // Get all products
 
@@ -176,6 +195,8 @@ router.put("/sell/edit/:productId", async (req, res) => {
 
 // Change  product Status
 router.put("/sell/edit/status/:productId", verifyToken, async (req, res) => {
+  console.log("Edit Status Product");
+  console.log(req.params);
   try {
     const updatedStatus = await Product.findByIdAndUpdate(
       req.params.productId,

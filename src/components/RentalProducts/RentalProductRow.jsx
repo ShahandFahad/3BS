@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import "./SingleCurrentUserProduct.css";
 import currencyFormatter from "currency-formatter";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { publicRequest, userRequest } from "../../../requestMethods";
-import CloseIcon from "@mui/icons-material/Close";
+import { publicRequest } from "../../requestMethods";
+import { userRequest } from "../../requestMethods";
 import { Link } from "react-router-dom";
-import zIndex from "@mui/material/styles/zIndex";
 
-function SingleCurrentUserProduct({ product, mode }) {
+function RentalProductRow({ product, mode }) {
   const [modal, setModal] = useState(false);
   const [productViews, setProductViews] = useState([]);
   // fetch product views
@@ -52,21 +50,16 @@ function SingleCurrentUserProduct({ product, mode }) {
   };
 
   // handle Status for exchange product
-  const handleExchangeStatus = async (status) => {
+  const handleProductRent = async (status) => {
+    // /sell/edit/status/:productId
     try {
-      status === "exchange"
-        ? (await userRequest.put(
-            `/exchangeproduct/exchange/edit/status/${product._id}`,
-            {
-              status,
-            }
-          )) && setModal(false)
-        : (await userRequest.put(
-            `/exchangeproduct/exchange/edit/status/${product._id}`,
-            {
-              status,
-            }
-          )) && setModal(false);
+      status === "rent"
+        ? (await userRequest.put(`/product/sell/edit/status/${product._id}`, {
+            status,
+          })) && setModal(false)
+        : (await userRequest.put(`/product/sell/edit/status/${product._id}`, {
+            status,
+          })) && setModal(false);
       /**
        * When The status for product exchange is changed. Refreset the page
        * This not an efficient way to do it. Just for Temprory purpose.
@@ -110,33 +103,12 @@ function SingleCurrentUserProduct({ product, mode }) {
         <div class="flex items-center">
           {/* <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>{" "}
                     Online */}
-          <Link
-            to={
-              product.status === "exchange" &&
-              `/exchangeproductdetails/${product._id}`
-            }
-          >
-            <span class="flex items-center text-gray-500">
-              <div
-                class={`h-2.5 w-2.5 rounded-full me-2
-              ${
-                product.status === "Sold" ||
-                product.status === "exchanged" ||
-                product.status === "sold"
-                  ? "bg-red-500"
-                  : "bg-green-500"
-              }`}
-              ></div>
+          <div
+            class={`h-2.5 w-2.5 rounded-full me-2
+              ${product.status === "rented" ? "bg-red-500" : "bg-green-500"}`}
+          ></div>
 
-              {/* style=
-               */}
-              {product.status === "exchange" ? (
-                <>Exchange</>
-              ) : (
-                <>{product.status.toUpperCase()}</>
-              )}
-            </span>
-          </Link>
+          <>{product.status.toUpperCase()}</>
         </div>
       </td>
 
@@ -145,62 +117,41 @@ function SingleCurrentUserProduct({ product, mode }) {
         <div class="absolute top-0 right-10 mt-[-10px] w-full z-10 overflow-y-auto max-h-screen">
           {modal && (
             <div class="bg-white border border-gray-200 rounded-lg py-2">
-              {mode === "sell" ? (
+              {
                 <>
-                  <p
-                    onClick={() => removeProduct("sell")}
-                    class="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                  >
-                    Delete
-                  </p>
-                  <Link
-                    to={`/editproduct/${product._id}`}
+                  {/* <Link
+                    to={`/editexchangeproduct/${product._id}`}
                     class="px-4 py-2 block cursor-pointer hover:bg-gray-100"
                   >
                     Edit
-                  </Link>
-                  <p
-                    class="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                    onClick={() => setModal(false)}
+                  </Link> */}
+                  {product.status === "rented" ? (
+                    <p
+                      onClick={() => handleProductRent("avaliable")}
+                      class="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                    >
+                      Remove Rent
+                    </p>
+                  ) : (
+                    <p
+                      onClick={() => handleProductRent("rented")}
+                      class="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                    >
+                      Mark as Rented
+                    </p>
+                  )}
+                  {/* <Link
+                    to={`/exchangeproductdetails/${product._id}`}
+                    class="px-4 py-2 block cursor-pointer hover:bg-gray-100"
                   >
-                    Close
-                  </p>
-                </>
-              ) : (
-                <>
+                    Exchange NOW
+                  </Link> */}
                   <p
                     onClick={() => removeProduct("exchange")}
                     class="px-4 py-2 cursor-pointer hover:bg-gray-100"
                   >
                     Delete
                   </p>
-                  <Link
-                    to={`/editexchangeproduct/${product._id}`}
-                    class="px-4 py-2 block cursor-pointer hover:bg-gray-100"
-                  >
-                    Edit
-                  </Link>
-                  {product.status === "exchange" ? (
-                    <p
-                      onClick={() => handleExchangeStatus("exchanged")}
-                      class="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                    >
-                      Mark as Exchanged
-                    </p>
-                  ) : (
-                    <p
-                      onClick={() => handleExchangeStatus("exchange")}
-                      class="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                    >
-                      Mark as Exchange
-                    </p>
-                  )}
-                  <Link
-                    to={`/exchangeproductdetails/${product._id}`}
-                    class="px-4 py-2 block cursor-pointer hover:bg-gray-100"
-                  >
-                    Exchange NOW
-                  </Link>
                   <p
                     class="px-4 py-2 cursor-pointer hover:bg-gray-100"
                     onClick={() => setModal(false)}
@@ -208,7 +159,7 @@ function SingleCurrentUserProduct({ product, mode }) {
                     Close
                   </p>
                 </>
-              )}
+              }
             </div>
           )}
         </div>
@@ -226,4 +177,4 @@ function SingleCurrentUserProduct({ product, mode }) {
   );
 }
 
-export default SingleCurrentUserProduct;
+export default RentalProductRow;

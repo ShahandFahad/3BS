@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import "./SingleCurrentUserProduct.css";
 import currencyFormatter from "currency-formatter";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { publicRequest, userRequest } from "../../../requestMethods";
-import CloseIcon from "@mui/icons-material/Close";
+import { publicRequest } from "../../requestMethods";
+import { userRequest } from "../../requestMethods";
 import { Link } from "react-router-dom";
-import zIndex from "@mui/material/styles/zIndex";
 
-function SingleCurrentUserProduct({ product, mode }) {
+/**
+ * Single Row for CURRENTUSERBUYERREQUEST Component
+ */
+
+function BuyerRequestProductRow({ product, mode }) {
   const [modal, setModal] = useState(false);
   const [productViews, setProductViews] = useState([]);
   // fetch product views
@@ -32,41 +34,34 @@ function SingleCurrentUserProduct({ product, mode }) {
     const confirmation = window.confirm(
       "This product will be deleted parmanently."
     );
-    if (confirmation && behave === "sell") {
+    if (confirmation) {
       try {
-        const products = await userRequest.delete(
-          `/product/sell/delete/${product._id}`
-        );
+        await userRequest.delete(`/product/sell/delete/${product._id}`);
         setModal(false);
+
+        /**
+         * Reload window on product delete as temprory sate refresh solotuion
+         */
+        window.location.reload();
       } catch (err) {
         console.log(err.response.data);
       }
-    } else if (confirmation && behave === "exchange") {
-      const products = await userRequest.delete(
-        `/exchangeproduct/exchange/delete/${product._id}`
-      );
-      setModal(false);
     } else {
       setModal(false);
     }
   };
 
-  // handle Status for exchange product
-  const handleExchangeStatus = async (status) => {
+  // handle Status for  product
+  const handleProductBuyerRequest = async (status) => {
+    // /sell/edit/status/:productId
     try {
-      status === "exchange"
-        ? (await userRequest.put(
-            `/exchangeproduct/exchange/edit/status/${product._id}`,
-            {
-              status,
-            }
-          )) && setModal(false)
-        : (await userRequest.put(
-            `/exchangeproduct/exchange/edit/status/${product._id}`,
-            {
-              status,
-            }
-          )) && setModal(false);
+      status === "requested"
+        ? (await userRequest.put(`/product/sell/edit/status/${product._id}`, {
+            status,
+          })) && setModal(false)
+        : (await userRequest.put(`/product/sell/edit/status/${product._id}`, {
+            status,
+          })) && setModal(false);
       /**
        * When The status for product exchange is changed. Refreset the page
        * This not an efficient way to do it. Just for Temprory purpose.
@@ -110,33 +105,14 @@ function SingleCurrentUserProduct({ product, mode }) {
         <div class="flex items-center">
           {/* <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>{" "}
                     Online */}
-          <Link
-            to={
-              product.status === "exchange" &&
-              `/exchangeproductdetails/${product._id}`
-            }
-          >
-            <span class="flex items-center text-gray-500">
-              <div
-                class={`h-2.5 w-2.5 rounded-full me-2
+          <div
+            class={`h-2.5 w-2.5 rounded-full me-2
               ${
-                product.status === "Sold" ||
-                product.status === "exchanged" ||
-                product.status === "sold"
-                  ? "bg-red-500"
-                  : "bg-green-500"
+                product.status === "requested" ? "bg-red-500" : "bg-green-500"
               }`}
-              ></div>
+          ></div>
 
-              {/* style=
-               */}
-              {product.status === "exchange" ? (
-                <>Exchange</>
-              ) : (
-                <>{product.status.toUpperCase()}</>
-              )}
-            </span>
-          </Link>
+          <>{product.status.toUpperCase()}</>
         </div>
       </td>
 
@@ -145,62 +121,41 @@ function SingleCurrentUserProduct({ product, mode }) {
         <div class="absolute top-0 right-10 mt-[-10px] w-full z-10 overflow-y-auto max-h-screen">
           {modal && (
             <div class="bg-white border border-gray-200 rounded-lg py-2">
-              {mode === "sell" ? (
+              {
                 <>
-                  <p
-                    onClick={() => removeProduct("sell")}
-                    class="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                  >
-                    Delete
-                  </p>
-                  <Link
-                    to={`/editproduct/${product._id}`}
-                    class="px-4 py-2 block cursor-pointer hover:bg-gray-100"
-                  >
-                    Edit
-                  </Link>
-                  <p
-                    class="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                    onClick={() => setModal(false)}
-                  >
-                    Close
-                  </p>
-                </>
-              ) : (
-                <>
-                  <p
-                    onClick={() => removeProduct("exchange")}
-                    class="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                  >
-                    Delete
-                  </p>
-                  <Link
+                  {/* <Link
                     to={`/editexchangeproduct/${product._id}`}
                     class="px-4 py-2 block cursor-pointer hover:bg-gray-100"
                   >
                     Edit
-                  </Link>
-                  {product.status === "exchange" ? (
+                  </Link> */}
+                  {product.status === "requested" ? (
                     <p
-                      onClick={() => handleExchangeStatus("exchanged")}
+                      onClick={() => handleProductBuyerRequest("avaliable")}
                       class="px-4 py-2 cursor-pointer hover:bg-gray-100"
                     >
-                      Mark as Exchanged
+                      Remove Buyer Request
                     </p>
                   ) : (
                     <p
-                      onClick={() => handleExchangeStatus("exchange")}
+                      onClick={() => handleProductBuyerRequest("requested")}
                       class="px-4 py-2 cursor-pointer hover:bg-gray-100"
                     >
-                      Mark as Exchange
+                      Mark as Requested
                     </p>
                   )}
-                  <Link
+                  {/* <Link
                     to={`/exchangeproductdetails/${product._id}`}
                     class="px-4 py-2 block cursor-pointer hover:bg-gray-100"
                   >
                     Exchange NOW
-                  </Link>
+                  </Link> */}
+                  <p
+                    onClick={() => removeProduct()}
+                    class="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                  >
+                    Delete
+                  </p>
                   <p
                     class="px-4 py-2 cursor-pointer hover:bg-gray-100"
                     onClick={() => setModal(false)}
@@ -208,7 +163,7 @@ function SingleCurrentUserProduct({ product, mode }) {
                     Close
                   </p>
                 </>
-              )}
+              }
             </div>
           )}
         </div>
@@ -226,4 +181,4 @@ function SingleCurrentUserProduct({ product, mode }) {
   );
 }
 
-export default SingleCurrentUserProduct;
+export default BuyerRequestProductRow;

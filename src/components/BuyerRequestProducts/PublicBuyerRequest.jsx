@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import "./AllCurrentUserProducts.css";
-import SingleCurrentUserProduct from "./SingleCurrentUserProduct/SingleCurrentUserProduct";
 import { publicRequest } from "../../requestMethods";
 import { useSelector } from "react-redux";
 import { loader } from "../../loader";
+import PublicBuyerRequestRow from "./PublicBuyerRequestRow";
 
-function AllCurrentUserProducts({ mode }) {
+function PublicBuyerRequest({ mode }) {
   const user = useSelector((state) => state.user);
   const [products, setProducts] = useState([]);
-  const [exchangeProducts, setExchangeProducts] = useState([]);
+  const [rentalProducts, setRentalProducts] = useState([]);
   // loading
   const [loading, setLoading] = useState(false);
   // fetch all product of current user
@@ -25,30 +24,32 @@ function AllCurrentUserProducts({ mode }) {
         console.log(err.response.data);
       }
     };
-    getProducts();
-  }, []);
-
-  // fetch all Exchange product of current user
-  useEffect(() => {
-    setLoading(true);
-    const getProducts = async () => {
+    //
+    const getBuyerRequestProducts = async () => {
       try {
-        const fechedProducts = await publicRequest.get(
-          `/exchangeproduct/exchange/all/${user._id}`
+        // Fetch Products listed for rent
+        const response = await publicRequest.get(
+          `/product/product-listed-for/all/${user._id}/${"Buyer Request"}`
         );
-        setExchangeProducts(fechedProducts.data.allProducts);
+        setRentalProducts(response.data.data);
         setLoading(false);
       } catch (err) {
         console.log(err.response.data);
       }
     };
+
     getProducts();
+    getBuyerRequestProducts();
   }, []);
+
   return (
-    // <div className="all__current__user__products">
     <>
       <>
         <div style={{ height: "100vh" }} class="overflow-x-auto shadow-md">
+          {/* Display Public Products availabel for rent */}
+          <h1 className="text-2xl p-4">
+            Public Buyer Request Products Products
+          </h1>
           <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
               <tr>
@@ -57,9 +58,6 @@ function AllCurrentUserProducts({ mode }) {
                 </th>
                 <th scope="col" class="px-6 py-3">
                   Name
-                </th>
-                <th scope="col" class="px-6 py-3">
-                  Views
                 </th>
                 <th scope="col" class="px-6 py-3">
                   Price (PKr)
@@ -71,25 +69,19 @@ function AllCurrentUserProducts({ mode }) {
                   Status
                 </th>
                 <th scope="col" class="px-6 py-3">
-                  Action
+                  Request
                 </th>
               </tr>
             </thead>
             <tbody>
-              {/* In profile only display simple sell */}
-              {!loading ? (
-                mode === "sell" ? (
-                  products.map((product) =>
-                    product.listFor === "Simple Sell" ? (
-                      <SingleCurrentUserProduct product={product} mode={mode} />
-                    ) : (
-                      <></>
-                    )
+              {/* Iterate over list of products and filter out products which are listed as rent */}
+              {!loading && mode === "buyerRequest" ? (
+                rentalProducts.map((product) =>
+                  product.listFor === "Buyer Request" ? (
+                    <PublicBuyerRequestRow product={product} />
+                  ) : (
+                    <></>
                   )
-                ) : (
-                  exchangeProducts.map((product) => (
-                    <SingleCurrentUserProduct product={product} mode={mode} />
-                  ))
                 )
               ) : (
                 <div
@@ -109,8 +101,7 @@ function AllCurrentUserProducts({ mode }) {
         </div>
       </>
     </>
-    // </div>
   );
 }
 
-export default AllCurrentUserProducts;
+export default PublicBuyerRequest;
