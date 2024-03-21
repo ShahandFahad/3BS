@@ -12,14 +12,14 @@ function NewProduct({ mode }) {
       <Navbar2 />
 
       {/* New Product */}
-      {mode === "sell" ? (
+      {/* {mode === "sell" ? (
         <h1 className="new__product__page__title">Add New Product To Sell</h1>
       ) : (
         <h1 className="new__product__page__title">Add Product To Exchange</h1>
-      )}
-      <div className="new__product">
+      )} */}
+      <div className="">
         {/* form */}
-        <div className="product__form">
+        <div className="">
           {mode === "sell" ? <ProductForm /> : <ExchangeProductForm />}
         </div>
       </div>
