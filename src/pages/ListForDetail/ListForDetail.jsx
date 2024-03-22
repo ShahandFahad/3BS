@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar2";
-import { publicRequest } from "../../requestMethods";
+
+import { publicRequest, userRequest } from "../../requestMethods";
+import * as timeago from "timeago.js";
+// import { useDispatch, useSelector } from "react-redux";
+import { CURRENT_CHAT, SELECTED } from "../../redux/User/userTypes";
 
 export default function ListForDetail() {
   const { productId } = useParams();
@@ -16,6 +20,12 @@ export default function ListForDetail() {
 
   const [productImages, setProductImages] = useState([]);
   const [newPhoto, setNewPhoto] = useState(productImages[0]);
+
+  // current conversations
+  const [currentConversations, setCurrentConversations] = useState([]);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   // fetch product Details
   useEffect(() => {
     setLoading(true);
@@ -42,6 +52,48 @@ export default function ListForDetail() {
       month: "long",
     }
   );
+
+  // Enable Chat
+
+  // fetch current conversations
+  useEffect(() => {
+    setLoading(true);
+    const fetchData = async () => {
+      const chats = await userRequest.get(`/conversation/find/${user._id}`);
+      setCurrentConversations(chats.data);
+    };
+    fetchData();
+  }, []);
+
+  const handleChat = async () => {
+    // console.log(details.By._id);
+    // console.log(currentConversations);
+    const found = currentConversations?.map((m) =>
+      m.members.find((f) => {
+        return f === productOwnerDetail._id;
+      })
+    );
+
+    try {
+      const final = found.filter((f) => f === productOwnerDetail._id);
+      if (final.length > 0) {
+        dispatch({ type: SELECTED, selected: null }) &&
+          dispatch({ type: CURRENT_CHAT, currentChat: null });
+        navigate("/chatbox");
+      } else {
+        const newChat = await userRequest.post(`/conversation`, {
+          senderId: user._id,
+          recieverId: productOwnerDetail._id,
+        });
+        newChat &&
+          dispatch({ type: SELECTED, selected: productOwnerDetail }) &&
+          dispatch({ type: CURRENT_CHAT, currentChat: newChat._id }) &&
+          navigate("/chatbox");
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
 
   return (
     <>
@@ -123,6 +175,7 @@ export default function ListForDetail() {
 
                   <div class="flex py-4 space-x-4">
                     <button
+                      onClick={handleChat}
                       type="button"
                       class="h-14 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white"
                     >
