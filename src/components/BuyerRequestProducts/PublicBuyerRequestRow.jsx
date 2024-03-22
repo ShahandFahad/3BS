@@ -64,19 +64,21 @@ function PublicBuyerRequestRow({ product }) {
         >
           {/* Show More Icon */}
           {/* <MoreVertIcon onClick={() => setModal(!modal)} /> */}
-          <button
-            type="button"
-            class={`text-white  hover:bg-blue-800 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2  focus:outline-none
+          <Link to={`/listforproductdetails/${product._id}`}>
+            <button
+              type="button"
+              class={`text-white  hover:bg-blue-800 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2  focus:outline-none
             ${
               product.status === "requested"
                 ? "bg-red-500 cursor-not-allowed hover:bg-red-800"
                 : "bg-blue-600"
             }
             `}
-            disabled={product.status === "requested" ? true : false}
-          >
-            Request
-          </button>
+              disabled={product.status === "requested" ? true : false}
+            >
+              Request
+            </button>
+          </Link>
         </a>
       </td>
     </tr>

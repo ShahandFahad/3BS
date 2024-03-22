@@ -54,7 +54,7 @@ function App() {
           <Route path="/currentusersell" element={<Sell />} />
           <Route path="/rentproducts" element={<Rent />} />
           <Route
-            path="/rentproductdetails/:productId"
+            path="/listforproductdetails/:productId"
             element={<ListForDetail />}
           />
           <Route path="/buyerrequestproducts" element={<BuyerRequest />} />
