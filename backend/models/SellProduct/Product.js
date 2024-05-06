@@ -43,7 +43,7 @@ const ProductSchema = new mongoose.Schema(
     },
     listFor: String,
     // For products when placed for auction
-    auctionDuration: String,
+    auctionDuration: Date,
     auctionStartingBid: String,
     auctionQuantity: String,
   },

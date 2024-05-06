@@ -4,7 +4,19 @@ const Product = require("../models/SellProduct/Product");
 exports.createNewSellProduct = async (req, res) => {
   console.log("Posting Product");
   console.log(req.body);
-  const newProduct = new Product(req.body);
+  let product = req.body;
+
+  // Incase for Bidding: Set Auction Duration
+  if (product.auctionDuration) {
+    product.auctionDuration = new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate() + parseInt(product.auctionDuration)
+    );
+  }
+
+  // Store Product
+  const newProduct = new Product(product);
   try {
     const savedProduct = await newProduct.save();
     res.status(200).json(savedProduct);
@@ -23,6 +35,9 @@ exports.getProductsListedFor = async (req, res) => {
       userId: { $ne: req.params.userId }, // Exclude products owned by the current user
       listFor: req.params.listFor,
     }).sort({ createdAt: -1 });
+
+    console.log("Bid:");
+    console.log(data);
 
     // Response
     res.status(200).json({
