@@ -46,6 +46,13 @@ const ProductSchema = new mongoose.Schema(
     auctionDuration: Date,
     auctionStartingBid: String,
     auctionQuantity: String,
+    bids: [
+      {
+        bidderId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+        bidderName: String,
+        bidPrice: Number,
+      },
+    ],
   },
   { timestamps: true },
   { ignoreUndefined: true }
