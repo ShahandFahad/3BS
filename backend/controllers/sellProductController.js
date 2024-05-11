@@ -25,6 +25,28 @@ exports.createNewSellProduct = async (req, res) => {
   }
 };
 
+// Place bid on products
+exports.placeBid = async (req, res) => {
+  try {
+    console.log("Placing a bid on Product");
+    console.log(req.body);
+    const { productId } = req.params;
+    // Mogoose: Updating Embedded Array Documents
+    /**
+     * Find the product by id
+     * Then push the new object in the bids array
+     */
+    const newBid = await Product.findOneAndUpdate(
+      { _id: productId },
+      { $push: { bids: req.body } },
+      { new: true } // Return the updated document
+    );
+    // Response
+    res.status(200).json({ status: "Success", message: "Bid Placed", newBid });
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+};
 // Get All Products: Displays all public products
 exports.getProductsListedFor = async (req, res) => {
   try {
