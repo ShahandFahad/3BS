@@ -53,6 +53,12 @@ const ProductSchema = new mongoose.Schema(
         bidPrice: Number,
       },
     ],
+    auctionClosed: { type: Boolean, default: false },
+    auctionWinner: {
+      bidderId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+      bidderName: String,
+      bidPrice: Number,
+    },
   },
   { timestamps: true },
   { ignoreUndefined: true }

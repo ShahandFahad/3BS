@@ -17,7 +17,10 @@ router.route("/sell/add").post(
   sellProductController.createNewSellProduct
 );
 
-router.route("/sell/add/:productId").patch(sellProductController.placeBid);
+router
+  .route("/sell/add/:productId")
+  .patch(sellProductController.placeBid)
+  .put(sellProductController.updateProductDocument);
 
 // Get all rental products list for rent, buyer request etc. For public, exclude user id
 router.get(

@@ -47,19 +47,45 @@ exports.placeBid = async (req, res) => {
     res.status(500).json(err.message);
   }
 };
+
+// Update Product document for bid winner and closing bid
+exports.updateProductDocument = async (req, res) => {
+  try {
+    console.log("Updating Product Document");
+    console.log(req.body);
+    const { productId } = req.params;
+    const { auctionClosed, auctionWinner } = req.body;
+
+    /**
+     * Find the product by id
+     * Update the fields
+     */
+    const updatedProduct = await Product.findOneAndUpdate(
+      { _id: productId },
+      { auctionClosed: auctionClosed, auctionWinner: auctionWinner },
+      { new: true } // Return the updated document
+    );
+    // Response
+    res
+      .status(200)
+      .json({ status: "Success", message: "Product Updated", updatedProduct });
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+};
+
 // Get All Products: Displays all public products
 exports.getProductsListedFor = async (req, res) => {
   try {
-    console.log("Listed for: ");
-    console.log(req.params);
+    // console.log("Listed for: ");
     // Find all products list for Rent, Bidding etc, Exclude current user products
     const data = await Product.find({
       userId: { $ne: req.params.userId }, // Exclude products owned by the current user
       listFor: req.params.listFor,
     }).sort({ createdAt: -1 });
 
-    console.log("Bid:");
-    console.log(data);
+    // console.log("Bid:");
+    // console.log(data);
 
     // Response
     res.status(200).json({
