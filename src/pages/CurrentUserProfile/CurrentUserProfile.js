@@ -17,6 +17,7 @@ import CurrentUserRentalProducts from "../../components/RentalProducts/CurrentUs
 import CurrentUserBuyerRequest from "../../components/BuyerRequestProducts/CurrentUserBuyerRequest";
 
 import styled from "styled-components";
+import CurrentUserProductsForBidding from "../../components/BiddingProducts/CurrentUserProductsForBidding";
 
 const Profile = styled.div`
   @media (max-width: 768px) {
@@ -98,6 +99,9 @@ function CurrentUserProfile() {
 
             {/*Current User Product listed as for buyer request  */}
             <CurrentUserBuyerRequest mode="Buyer Request" />
+
+            {/* Current User Bidded Prducts */}
+            <CurrentUserProductsForBidding mode="CurretUserBiddedProducts" />
           </SellProduct>
         </div>
       </Profile>
