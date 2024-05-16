@@ -28,7 +28,7 @@ const navigation = [
   // { name: "Products", visitTo: "#", current: false },
   // { name: "Sell", visitTo: "/currentusersell", current: false },
   { name: "Bartering", visitTo: "/exchangeproducts", current: false },
-  { name: "Bidding", visitTo: "#", current: false },
+  { name: "Bidding", visitTo: "/biddedproducts", current: false },
   { name: "Rent", visitTo: "/rentproducts", current: false },
   { name: "Buyer Request", visitTo: "/buyerrequestproducts", current: false },
 ];

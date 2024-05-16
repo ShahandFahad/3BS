@@ -38,6 +38,8 @@ import Sell from "./pages/Sell/Sell";
 import Rent from "./pages/Rent/Rent";
 import BuyerRequest from "./pages/BuyerRequest/BuyerRequest";
 import ListForDetail from "./pages/ListForDetail/ListForDetail";
+import Bidding from "./pages/Bidding/Bidding";
+import BiddingListDetail from "./pages/ListForDetail/BiddingListDetail";
 
 function App() {
   return (
@@ -57,6 +59,10 @@ function App() {
             path="/listforproductdetails/:productId"
             element={<ListForDetail />}
           />
+          <Route
+            path="/listforbidding/:productId"
+            element={<BiddingListDetail />}
+          />
           <Route path="/buyerrequestproducts" element={<BuyerRequest />} />
           <Route path="/addsellproduct" element={<NewProduct mode="sell" />} />
           <Route path="/editproduct/:productId" element={<EditProduct />} />
@@ -64,6 +70,7 @@ function App() {
             path="/editexchangeproduct/:productId"
             element={<EditExchangeProduct />}
           />
+          <Route path="/biddedproducts" element={<Bidding />} />
           <Route path="/search" element={<Search />} />
           <Route
             path="/addexchangeproduct"

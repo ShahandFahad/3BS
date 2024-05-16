@@ -10,12 +10,17 @@ const {
 // Sell Product Controller
 const sellProductController = require("../../controllers/sellProductController");
 
-// Add product
-router.post(
-  "/sell/add",
-  verifyToken,
+// Add product &
+// Patch a bid to the existing product
+router.route("/sell/add").post(
+  // verifyToken,
   sellProductController.createNewSellProduct
 );
+
+router
+  .route("/sell/add/:productId")
+  .patch(sellProductController.placeBid)
+  .put(sellProductController.updateProductDocument);
 
 // Get all rental products list for rent, buyer request etc. For public, exclude user id
 router.get(
