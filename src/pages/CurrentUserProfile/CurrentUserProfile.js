@@ -18,6 +18,7 @@ import CurrentUserBuyerRequest from "../../components/BuyerRequestProducts/Curre
 
 import styled from "styled-components";
 import CurrentUserProductsForBidding from "../../components/BiddingProducts/CurrentUserProductsForBidding";
+import CurrentUserStore from "../../components/CureentUserStore/CurrentUserStore";
 
 const Profile = styled.div`
   @media (max-width: 768px) {
@@ -50,6 +51,7 @@ function CurrentUserProfile() {
   const user = useSelector((state) => state.user);
   const [active, setActive] = useState(true);
   const [createStore, setCreateStore] = useState(false);
+  const [showStore, setShowStore] = useState(false);
   const [storeForm, setStoreForm] = useState({
     hasStore: true,
     storeName: "",
@@ -126,15 +128,24 @@ function CurrentUserProfile() {
                   Add New Product
                 </Link> */}
                 {user.hasStore === true ? (
-                  <Link to="/addsellproduct" className="new__btn bg-blue-500">
-                    Your Store
-                  </Link>
+                  <button
+                    onClick={() =>
+                      showStore ? setShowStore(false) : setShowStore(true)
+                    }
+                    className={`new__btn ${
+                      showStore ? "bg-red-500" : "bg-blue-500"
+                    }`}
+                  >
+                    {showStore ? "Hide Store" : " Show Store"}
+                  </button>
                 ) : (
                   <button
                     onClick={() =>
                       createStore ? setCreateStore(false) : setCreateStore(true)
                     }
-                    className="new__btn bg-red-500"
+                    className={`new__btn ${
+                      createStore ? "bg-red-500" : "bg-green-500"
+                    }`}
                   >
                     {createStore ? "Cancel" : "Create Store"}
                   </button>
@@ -173,6 +184,8 @@ function CurrentUserProfile() {
             ) : (
               <></>
             )}
+            {/* Current User Store Products */}
+            {showStore && <CurrentUserStore mode="storeproudcts" />}
             {/* All Products of Current User */}
             {active ? <AllCurrentUserProducts mode="sell" /> : <Favorite />}
             {/*  Current User product listed as for rent*/}
