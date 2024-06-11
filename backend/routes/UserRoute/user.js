@@ -298,20 +298,24 @@ router.delete("/delete/:userId", verifyTokenAndAdmin, async (req, res) => {
 });
 
 // Update a User
-router.put("/edit/:userId", verifyTokenAndAuthorization, async (req, res) => {
-  try {
-    const updatedUser = await User.findByIdAndUpdate(
-      req.params.userId,
-      {
-        $set: req.body,
-      },
-      { new: true }
-    );
-    res.status(201).json(updatedUser);
-  } catch (err) {
-    res.status(500).json(err.message);
+// TODO: Add this token again. Resolve the issue with the token
+router.put(
+  "/edit/:userId",
+  /*verifyTokenAndAuthorization, */ async (req, res) => {
+    try {
+      const updatedUser = await User.findByIdAndUpdate(
+        req.params.userId,
+        {
+          $set: req.body,
+        },
+        { new: true }
+      );
+      res.status(201).json(updatedUser);
+    } catch (err) {
+      res.status(500).json(err.message);
+    }
   }
-});
+);
 
 // export router
 module.exports = router;

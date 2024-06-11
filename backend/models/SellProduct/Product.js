@@ -59,6 +59,10 @@ const ProductSchema = new mongoose.Schema(
       bidderName: String,
       bidPrice: Number,
     },
+    inTheStore: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true },
   { ignoreUndefined: true }
