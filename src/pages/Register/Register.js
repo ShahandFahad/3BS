@@ -89,7 +89,7 @@ function Register() {
           dob: birthDay + " " + birthMonth + ", " + birthYear,
           gender,
         });
-        // navigate("/verifyotp", { state: { Email: newUser.data.email } });
+        navigate("/verifyotp", { state: { Email: newUser.data.usr.email } });
         // Set user register status for toast display
         if (newUser.status === 200) {
           setUserRegistered(true);
