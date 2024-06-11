@@ -37,6 +37,8 @@ function ProductForm({
     auctionDuration: undefined,
     auctionStartingBid: undefined,
     auctionQuantity: undefined,
+    // Incase of store
+    inTheStore: false,
   });
   const [allPhotos, setAllPhotos] = useState([]);
   let sendAllphotos = [];
@@ -126,6 +128,7 @@ function ProductForm({
                   auctionDuration: newProduct.auctionDuration,
                   auctionStartingBid: newProduct.auctionStartingBid,
                   auctionQuantity: newProduct.auctionQuantity,
+                  inTheStore: newProduct.inTheStore,
                 });
                 navigate("/");
                 setLoading(false);
@@ -422,6 +425,24 @@ function ProductForm({
                   >
                     Description
                   </label> */}
+                  {/*Check: Incase use has no store, then donot show */}
+                  {user.hasStore === true ? (
+                    <div className="text-green-500 text-xl leading-relaxed mt-2 flex align-middle gap-4 items-center">
+                      <span>Add to store:</span>{" "}
+                      <input
+                        onChange={(e) =>
+                          setNewProduct({
+                            ...newProduct,
+                            inTheStore: true,
+                          })
+                        }
+                        className="border text-xl"
+                        type="checkbox"
+                      />
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                   <div className="mt-2">
                     <textarea
                       id="about"
