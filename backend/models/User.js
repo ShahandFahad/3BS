@@ -45,6 +45,12 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    hasStore: {
+      type: Boolean,
+      default: false,
+    },
+    storeName: String,
+    storeDescription: String,
     level: {
       type: Number,
       default: 1,

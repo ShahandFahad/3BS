@@ -4,26 +4,31 @@ import "./RecentProducts.css";
 import RecentProduct from "./RecentProduct/RecentProduct";
 import { publicRequest } from "../../requestMethods";
 import { loader } from "../../loader";
-function RecentProducts({ title, items }) {
+
+export default function ProuductByCategory({ title, items, category }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  // Fetch recent products
+
+  // fetch all product of current user
   useEffect(() => {
     setLoading(true);
-    const fetchProducts = async () => {
-      const fetched = await publicRequest.get("/product/recentproducts");
-      setProducts(fetched.data);
-      setLoading(false);
+    const getProducts = async () => {
+      try {
+        const fechedProducts = await publicRequest.get(`/product/sell/all`);
+        setProducts(fechedProducts.data);
+        setLoading(false);
+      } catch (err) {
+        console.log(err.response.data);
+      }
     };
-    fetchProducts();
+    getProducts();
   }, []);
-
   return !loading ? (
     <div className="recent__products">
       <h1 className="text-xl">{title}</h1>
       <div className="border p-6  rounded-md bg-gray-100 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4">
         {products.map((product, index) =>
-          index < items ? (
+          index < items && product.category === category ? (
             <RecentProduct key={product.id} product={product} />
           ) : (
             <></>
@@ -37,5 +42,3 @@ function RecentProducts({ title, items }) {
     </div>
   );
 }
-
-export default RecentProducts;

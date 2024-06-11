@@ -10,7 +10,7 @@ import Reviews from "../../components/Reviews/Reviews";
 import SoldProducts from "../../components/SoldProducts/SoldProducts";
 import "./CurrentUserProfile.css";
 import Favorite from "../../components/Favorite/Favorite";
-import { userRequest } from "../../requestMethods";
+import { publicRequest, userRequest } from "../../requestMethods";
 
 import Navbar2 from "../../components/Navbar/Navbar2";
 import CurrentUserRentalProducts from "../../components/RentalProducts/CurrentUserRentalProducts";
@@ -18,6 +18,7 @@ import CurrentUserBuyerRequest from "../../components/BuyerRequestProducts/Curre
 
 import styled from "styled-components";
 import CurrentUserProductsForBidding from "../../components/BiddingProducts/CurrentUserProductsForBidding";
+import CurrentUserStore from "../../components/CureentUserStore/CurrentUserStore";
 
 const Profile = styled.div`
   @media (max-width: 768px) {
@@ -49,6 +50,42 @@ const SellProduct = styled.div`
 function CurrentUserProfile() {
   const user = useSelector((state) => state.user);
   const [active, setActive] = useState(true);
+  const [createStore, setCreateStore] = useState(false);
+  const [showStore, setShowStore] = useState(false);
+  const [storeForm, setStoreForm] = useState({
+    hasStore: true,
+    storeName: "",
+    storeDescription: "",
+  });
+
+  // Store Details
+  const handleChange = (e) => {
+    setStoreForm((prev) => ({ ...storeForm, [e.target.name]: e.target.value }));
+  };
+
+  // Create store
+  const handleSubmit = async () => {
+    try {
+      if (storeForm.name === "" || storeForm.storeDescription === "") {
+        alert("Please fill the store form correctly");
+      } else {
+        const postStore = await publicRequest.put(
+          `user/edit/${JSON.parse(localStorage.getItem("user"))._id}`,
+          storeForm
+        );
+
+        // console.log(postStore);
+        // update user data
+        localStorage.setItem("user", JSON.stringify(postStore.data));
+        // reload page, a temprory soloution for updating state
+        if (postStore.status === 201) {
+          window.location.reload();
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -87,11 +124,68 @@ function CurrentUserProfile() {
                 </p>
               </div>
               <div className="header__right">
-                <Link to="/addsellproduct" className="new__btn bg-blue-500">
+                {/* <Link to="/addsellproduct" className="new__btn bg-blue-500">
                   Add New Product
-                </Link>
+                </Link> */}
+                {user.hasStore === true ? (
+                  <button
+                    onClick={() =>
+                      showStore ? setShowStore(false) : setShowStore(true)
+                    }
+                    className={`new__btn ${
+                      showStore ? "bg-red-500" : "bg-blue-500"
+                    }`}
+                  >
+                    {showStore ? "Hide Store" : " Show Store"}
+                  </button>
+                ) : (
+                  <button
+                    onClick={() =>
+                      createStore ? setCreateStore(false) : setCreateStore(true)
+                    }
+                    className={`new__btn ${
+                      createStore ? "bg-red-500" : "bg-green-500"
+                    }`}
+                  >
+                    {createStore ? "Cancel" : "Create Store"}
+                  </button>
+                )}
               </div>
             </div>
+            {createStore ? (
+              <div className="flex flex-col gap-4 p-10 bg-gray-100">
+                <h1 className="text-2xl font-sans font-bold">
+                  Enter Store Details
+                </h1>
+                Store Name:{" "}
+                <input
+                  className="p-2"
+                  placeholder="Name"
+                  name="storeName"
+                  onChange={handleChange}
+                />
+                Description:{" "}
+                <textarea
+                  className="p-2"
+                  rows={3}
+                  placeholder="Description"
+                  name="storeDescription"
+                  onChange={handleChange}
+                ></textarea>
+                <div>
+                  <button
+                    onClick={handleSubmit}
+                    className="new__btn bg-blue-500 p-2 rounded-md text-white"
+                  >
+                    Create
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <></>
+            )}
+            {/* Current User Store Products */}
+            {showStore && <CurrentUserStore mode="storeproudcts" />}
             {/* All Products of Current User */}
             {active ? <AllCurrentUserProducts mode="sell" /> : <Favorite />}
             {/*  Current User product listed as for rent*/}
