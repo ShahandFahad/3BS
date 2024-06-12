@@ -6,7 +6,7 @@ import * as timeago from "timeago.js";
 import { publicRequest } from "../../../requestMethods";
 import { useSelector } from "react-redux";
 import { MapPinIcon } from "@heroicons/react/24/outline";
-function RecentProduct({ product }) {
+function RecentProduct({ product, path }) {
   const [productViews, setProductViews] = useState([]);
   const user = useSelector((state) => state.user);
 
@@ -35,7 +35,7 @@ function RecentProduct({ product }) {
 
   return (
     <Link
-      to={`/product/${product._id}`}
+      to={`${path}`}
       onClick={() => handleViewsClick(product._id, product.userId)}
     >
       {/* <div className="recent__product">

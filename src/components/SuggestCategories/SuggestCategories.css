@@ -1,7 +1,9 @@
 .suggest__categories {
   width: 90%;
   margin: auto;
+  /* border: 1px solid red; */
 }
+
 .suggest__categories h1 {
   margin: 15px 0;
   font-weight: 500;
@@ -21,6 +23,7 @@
   text-transform: capitalize;
   margin-top: 10px;
 }
+
 .suggest__categories .btns a {
   border: none;
   outline: none;
@@ -32,7 +35,12 @@
   background-color: transparent;
   color: gray;
   transition: 0.2s;
+  width: 150px; /* Set a fixed width for the category boxes */
+  display: flex; /* Enable flexbox layout */
+  align-items: center; /* Center the text vertically */
+  justify-content: center; /* Center the text horizontally */
 }
+
 .suggest__categories a:hover {
   background-color: var(--primary-color);
   color: #fff;

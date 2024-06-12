@@ -5,7 +5,7 @@ import RecentProduct from "./RecentProduct/RecentProduct";
 import { publicRequest } from "../../requestMethods";
 import { loader } from "../../loader";
 
-export default function ProuductByCategory({ title, items, category }) {
+export default function ProuductByCategory({ title, items, listFor, path }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -28,8 +28,8 @@ export default function ProuductByCategory({ title, items, category }) {
       <h1 className="text-xl">{title}</h1>
       <div className="border p-6  rounded-md bg-gray-100 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4">
         {products.map((product, index) =>
-          index < items && product.category === category ? (
-            <RecentProduct key={product.id} product={product} />
+          index < items && product.listFor === listFor ? (
+            <RecentProduct key={product.id} product={product} path={path} />
           ) : (
             <></>
           )
