@@ -1,13 +1,13 @@
 import React from "react";
 import "./Home.css";
-import Navbar from "../../components/Navbar/Navbar";
+// import Navbar from "../../components/Navbar/Navbar";
 import Navbar2 from "../../components/Navbar/Navbar2";
 import SuggestCategories from "../../components/SuggestCategories/SuggestCategories";
 import RecentProducts from "../../components/RecentProducts/RecentProducts";
 import Footer from "../../components/Footer/Footer";
 import Banner from "./Banner";
 import ProuductByCategory from "../../components/RecentProducts/ProuductByCategory";
-// TODO: Change the Navbar. Add Search and Other Links
+import ProductForExchnageHomePage from "../../components/RecentProducts/ProductForExchnageHomePage";
 function Home() {
   return (
     <>
@@ -21,26 +21,45 @@ function Home() {
       <Navbar2 />
       <Banner />
       <SuggestCategories />
-      {/* TODO: Make same file in recent prouducts, and return poducts based on vategory */}
-      <RecentProducts title="Recent Products" items={4} />
-      <ProuductByCategory
-        title="Motercycles"
-        items={4}
-        category="Motercycles"
+      {/* Show simple sell products in recent and can visited via id */}
+      <RecentProducts
+        title="Recent Products"
+        items={10}
+        path="/product"
+        listFor="Simple Sell"
       />
-      <ProuductByCategory title="Sneakers" items={4} category="Sneakers" />
-      <ProuductByCategory title="Furniture" items={4} category="Furniture" />
-      <ProuductByCategory title="Cars" items={4} category="Cars" />
-      <ProuductByCategory title="Vehicles" items={4} category="Vehicles" />
-      <ProuductByCategory title="Computers" items={4} category="Computers" />
-      <ProuductByCategory title="Bikes" items={4} category="Bikes" />
+
+      {/* Donnot visit product details, only visit respective page for below */}
       <ProuductByCategory
-        title="Mobile Phones"
+        title="Bidding"
         items={4}
-        category="Mobile Phones"
+        listFor="Bidding"
+        path="/biddedproducts"
       />
-      <ProuductByCategory title="Houses" items={4} category="Houses" />
-      <ProuductByCategory title="Toys" items={4} category="Toys" />
+      {/* <ProuductByCategory
+        title="Bartering"
+        items={4}
+        listFor="Bartering"
+        path="/exchangeproducts"
+      /> */}
+      <ProductForExchnageHomePage
+        title="Bartering"
+        items={4}
+        listFor="Bartering"
+        path="/exchangeproducts"
+      />
+      <ProuductByCategory
+        title="Rent"
+        items={4}
+        listFor="Rent"
+        path="/rentproducts"
+      />
+      <ProuductByCategory
+        title="Buyer Request"
+        items={4}
+        listFor="Buyer Request"
+        path="/buyerrequestproducts"
+      />
 
       <Footer />
     </>

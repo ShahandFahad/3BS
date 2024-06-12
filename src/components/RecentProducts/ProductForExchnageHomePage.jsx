@@ -4,31 +4,34 @@ import "./RecentProducts.css";
 import RecentProduct from "./RecentProduct/RecentProduct";
 import { publicRequest } from "../../requestMethods";
 import { loader } from "../../loader";
-function RecentProducts({ title, items, listFor, path }) {
+
+export default function ProductForExchnageHomePage({ title, items, path }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  // Fetch recent products
+
+  // fetch all product of current user
   useEffect(() => {
     setLoading(true);
-    const fetchProducts = async () => {
-      const fetched = await publicRequest.get("/product/recentproducts");
-      setProducts(fetched.data);
-      setLoading(false);
+    const getProducts = async () => {
+      try {
+        const fechedProducts = await publicRequest.get(
+          `/exchangeproduct/exchange/all`
+        );
+        setProducts(fechedProducts.data);
+        setLoading(false);
+      } catch (err) {
+        console.log(err.response.data);
+      }
     };
-    fetchProducts();
+    getProducts();
   }, []);
-
   return !loading ? (
     <div className="recent__products">
       <h1 className="text-xl">{title}</h1>
       <div className="border p-6  rounded-md bg-gray-100 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4">
         {products.map((product, index) =>
-          index < items && product.listFor === listFor ? (
-            <RecentProduct
-              key={product._id}
-              product={product}
-              path={`${path}/${product._id}`}
-            />
+          index < items ? (
+            <RecentProduct key={product.id} product={product} path={path} />
           ) : (
             <></>
           )
@@ -41,5 +44,3 @@ function RecentProducts({ title, items, listFor, path }) {
     </div>
   );
 }
-
-export default RecentProducts;
