@@ -230,23 +230,43 @@ router.delete("/sell/delete/:productId", verifyToken, async (req, res) => {
 
 // Searching products
 router.get("/sell/find", async (req, res) => {
+  console.log(req.body);
+  console.log(req.query);
   try {
-    const searchProducts = await Product.find({
+    // const searchProducts = await Product.find({
+    //   status: "Available",
+    //   $or: [
+    //     {
+    //       location: {
+    //         $regex: new RegExp(".*" + req.query.location + ".*", "i"),
+    //       },
+    //     },
+    //     {
+    //       title: { $regex: new RegExp(".*" + req.query.search + ".*", "i") },
+    //     },
+    //   ],
+    // });
+
+    const { location, search: title } = req.query;
+
+    let query = {
       status: "Available",
-      $or: [
-        {
-          category: { $regex: new RegExp(".*" + req.query.search + ".*", "i") },
-        },
-        {
-          title: { $regex: new RegExp(".*" + req.query.search + ".*", "i") },
-        },
-        {
-          description: {
-            $regex: new RegExp(".*" + req.query.search + ".*", "i"),
-          },
-        },
-      ],
-    });
+    };
+
+    if (location && title) {
+      query.$or = [
+        { location: { $regex: new RegExp(".*" + location + ".*", "i") } },
+        { title: { $regex: new RegExp(".*" + title + ".*", "i") } },
+      ];
+    } else if (location) {
+      query.location = { $regex: new RegExp(".*" + location + ".*", "i") };
+    } else if (title) {
+      query.title = { $regex: new RegExp(".*" + title + ".*", "i") };
+    }
+
+    const searchProducts = await Product.find(query).exec();
+
+    // console.log("Results: ", searchProducts);
 
     res.status(200).json(searchProducts);
   } catch (err) {

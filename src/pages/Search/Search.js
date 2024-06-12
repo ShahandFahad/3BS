@@ -9,6 +9,7 @@ import { publicRequest } from "../../requestMethods";
 import "./Search.css";
 function Search() {
   const search = useLocation().search;
+  const location = new URLSearchParams(search).get("location");
   const product = new URLSearchParams(search).get("product");
   const [searchProducts, setSearchProducts] = useState([]);
   //   loading
@@ -19,7 +20,7 @@ function Search() {
       setLoading(true);
       try {
         const searched = await publicRequest.get(
-          `/product/sell/find?search=${product}`
+          `/product/sell/find?location=${location}&&name=${product}`
         );
         setSearchProducts(searched.data);
         setLoading(false);
@@ -29,14 +30,16 @@ function Search() {
       }
     };
     searchProducts();
-  }, [product]);
+  }, [product, location]);
 
   return (
     <>
       {/* <Navbar /> */}
       <Navbar2 />
       <div className="search">
-        <h1>Search for "{product}"</h1>
+        <h1>
+          Search for "{product}" in {location}
+        </h1>
         {!loading ? (
           searchProducts.length === 0 ? (
             <div className="searched__products oops">
@@ -44,7 +47,7 @@ function Search() {
               <h2>Sorry, product is not found</h2>
             </div>
           ) : (
-            <div className="searched__products">
+            <div className="searched__products flex flex-wrap">
               {searchProducts.map((product) => (
                 <SoldProduct key={product._id} product={product} />
               ))}
